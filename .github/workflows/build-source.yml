@@ -30,7 +30,7 @@ jobs:
             --manifest-path sources/zh.manwamanhua/Cargo.toml \
             --target wasm32-unknown-unknown
           python3 sources/zh.manwamanhua/package.py \
-            --wasm target/wasm32-unknown-unknown/release/manwamanhua.wasm \
+            --wasm sources/zh.manwamanhua/target/wasm32-unknown-unknown/release/manwamanhua.wasm \
             --out sources/zh.manwamanhua-v1.aix
 
       - name: Publish package and registry entry

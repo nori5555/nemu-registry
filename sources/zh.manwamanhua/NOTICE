@@ -1,0 +1,31 @@
+Manwa (漫蛙) Aidoku/Rust port
+
+Original work: Keiyoushi extensions-source, Manwa extension.
+Copyright remains with the original Manwa/Tachiyomi/Keiyoushi contributors.
+License: Apache License, Version 2.0 (included verbatim in LICENSE).
+Original project: https://github.com/keiyoushi/extensions-source
+Reference tree: d9420cd1c66ecd3385946b616aacfcf8f6314f70
+Original sources:
+  src/zh/manwa/src/eu/kanade/tachiyomi/extension/zh/manwa/Manwa.kt
+  src/zh/manwa/src/eu/kanade/tachiyomi/extension/zh/manwa/Filters.kt
+  core/src/main/kotlin/keiyoushi/utils/Crypto.kt
+Original icon, retained unmodified:
+  src/zh/manwa/res/mipmap-xxxhdpi/ic_launcher.png
+The source files supplied upstream have no individual author/copyright header.
+Their authorship has not been reassigned to the author of this port.
+Upstream history and contributors remain the authoritative attribution record:
+  https://github.com/keiyoushi/extensions-source/commits/main/src/zh/manwa
+
+Modifications (2026): rewritten in Rust for the current Aidoku 0.3 source ABI;
+added custom baseURL, explicit failure diagnostics, stable mirror-independent keys,
+image request context and an AES-128-CBC NoPadding byte processor.
+The Kotlin mirror-update interceptor and JS-driven pages are not executed.
+No remote Worker or additional image relay is introduced.
+
+Aidoku API/examples reference:
+  https://github.com/Aidoku/aidoku-rs
+  ae6485e3c14ecd1fd5497d170eae884c68d04a87 (aidoku 0.3.0, skitty)
+  https://github.com/Aidoku-Community/sources
+  d4aee79f3187e575a2253c697867e7e1a2245b56
+Aidoku SDK and RustCrypto AES/CBC are third-party dependencies licensed
+MIT OR Apache-2.0. They are not represented as newly authored by this port.

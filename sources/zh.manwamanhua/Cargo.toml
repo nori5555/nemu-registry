@@ -1,0 +1,23 @@
+[package]
+name = "manwamanhua"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "Manwa Manhua (漫蛙漫画) Aidoku source, ported from Keiyoushi"
+
+[dependencies]
+aidoku = { git = "https://github.com/Aidoku/aidoku-rs.git", rev = "ae6485e3c14ecd1fd5497d170eae884c68d04a87", version = "=0.3.0", features = ["json"] }
+aes = { version = "=0.8.4", default-features = false }
+cbc = { version = "=0.1.2", default-features = false, features = ["block-padding"] }
+serde = { version = "1", default-features = false, features = ["derive"] }
+serde_json = { version = "1", default-features = false }
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+panic = "abort"
+opt-level = "s"
+strip = true
+lto = true
+codegen-units = 1

@@ -1958,9 +1958,9 @@
       "id": "multi.mangadotnet",
       "name": "Mangadotnet",
       "altNames": [],
-      "version": 9,
-      "iconURL": "icons/multi.mangadotnet-v9.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.mangadotnet-v9.aix",
+      "version": 10,
+      "iconURL": "icons/multi.mangadotnet-v10.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.mangadotnet-v10.aix",
       "languages": [
         "ar",
         "bg",
@@ -3159,23 +3159,6 @@
       "contentRating": 0,
       "baseURL": null,
       "minAppVersion": null,
-      "maxAppVersion": null
-    },
-    {
-      "id": "zh.manwa",
-      "name": "漫蛙",
-      "altNames": [
-        "Manwa"
-      ],
-      "version": 2,
-      "iconURL": "icons/zh.manwa-v2.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/sources/zh.manwa-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 2,
-      "baseURL": "https://manwa.me",
-      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {

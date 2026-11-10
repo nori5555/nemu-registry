@@ -514,23 +514,6 @@
       "maxAppVersion": null
     },
     {
-      "id": "zh.manwa",
-      "name": "漫蛙",
-      "altNames": [
-        "Manwa"
-      ],
-      "version": 2,
-      "iconURL": "icons/zh.manwa-v2.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/sources/zh.manwa-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 2,
-      "baseURL": "https://manwa.me",
-      "minAppVersion": "0.7.1",
-      "maxAppVersion": null
-    },
-    {
       "id": "zh.manwamanhua",
       "name": "漫蛙漫画",
       "altNames": [

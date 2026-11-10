@@ -48,6 +48,9 @@ jobs:
       - name: Build Chinese-only directory
         run: python3 tools/build_zh.py --index .build/index.json --icons .build/icons --out zh
 
+      - name: Mirror packages onto Pages (raw.githubusercontent is often blocked)
+        run: python3 tools/mirror_zh.py --index zh/index.json --out zh/sources
+
       - name: Validate output
         run: |
           python3 tools/mihon2aidoku.py verify --list .build/index.json --target nemu

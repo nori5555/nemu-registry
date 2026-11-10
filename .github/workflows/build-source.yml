@@ -26,7 +26,7 @@ jobs:
 
       - name: Build zh.manwamanhua
         run: |
-          cargo build --release --locked \
+          cargo build --release \
             --manifest-path sources/zh.manwamanhua/Cargo.toml \
             --target wasm32-unknown-unknown
           python3 sources/zh.manwamanhua/package.py \

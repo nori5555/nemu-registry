@@ -1,0 +1,64 @@
+name: Sync source directory
+
+on:
+  schedule:
+    # Every 2 days at 03:17 UTC (11:17 Asia/Shanghai).
+    - cron: "17 3 */2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-sources
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Convert upstream directories
+        env:
+          MIHON_INDEX: https://raw.githubusercontent.com/keiyoushi/extensions/repo/index.json
+          REGISTRIES: >-
+            https://aidoku-community.github.io/sources/index.min.json,
+            https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/index.min.json,
+            https://raw.githubusercontent.com/Aidoku-Community/legacy-sources/gh-pages/index.min.json,
+            https://raw.githubusercontent.com/AlanLang/aidoku-sources/gh-pages/index.min.json,
+            https://raw.githubusercontent.com/Moomooo95/aidoku-french-sources/gh-pages/index.min.json,
+            https://raw.githubusercontent.com/beer-psi/aidoku-ln-sources/gh-pages/index.min.json
+        run: |
+          python3 tools/mihon2aidoku.py convert \
+            --input "$MIHON_INDEX" \
+            --aidoku "$REGISTRIES" \
+            --scope all \
+            --target nemu \
+            --list-name "Aidoku 合并目录" \
+            --out .build \
+            --refresh
+
+      - name: Validate output
+        run: |
+          python3 tools/mihon2aidoku.py verify --list .build/index.json --target nemu
+
+      - name: Publish changed files
+        run: |
+          cp .build/index.json .build/index.min.json .
+          rm -rf icons
+          cp -r .build/icons icons
+          git add -A index.json index.min.json icons
+          if git diff --cached --quiet; then
+            echo "No upstream changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Sync upstream sources ($(date -u +%Y-%m-%d))"
+          git push

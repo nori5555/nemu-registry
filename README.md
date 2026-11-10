@@ -43,6 +43,11 @@
 - 各源的可用性取决于站点自身反爬和 Nemu 的浏览器运行时，可能出现 Cloudflare 拦截。
 - 图标路径为相对路径，移动/重命名 `icons/` 会导致图标 404。
 
+## 自动更新
+
+本仓库由 GitHub Actions 每 2 天（UTC 03:17）重新拉取上游目录并转换，只有内容变化时才提交。
+可在 Actions 页面手动触发 `Sync source directory`。
+
 ## 重新生成
 
 ```bash

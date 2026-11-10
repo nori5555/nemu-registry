@@ -7,9 +7,9 @@
       "altNames": [
         "Manwa"
       ],
-      "version": 1,
-      "iconURL": "icons/zh.manwa-v1.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/sources/zh.manwa-v1.aix",
+      "version": 2,
+      "iconURL": "icons/zh.manwa-v2.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/sources/zh.manwa-v2.aix",
       "languages": [
         "zh"
       ],

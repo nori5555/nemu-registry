@@ -795,7 +795,8 @@ def cmd_filter(args: argparse.Namespace) -> int:
         basename = os.path.basename(urllib.parse.urlparse(icon).path)
         entry["iconURL"] = f"icons/{basename}" if basename else None
 
-    index = build_index(meta.get("name") or args.list_name, kept)
+    list_name = args.list_name if args.list_name is not None else (meta.get("name") or "Filtered sources")
+    index = build_index(list_name, kept)
     out_dir = os.path.abspath(os.path.expanduser(args.out))
     os.makedirs(out_dir, exist_ok=True)
     write_json(os.path.join(out_dir, "index.json"), index)
@@ -983,7 +984,8 @@ def build_parser() -> argparse.ArgumentParser:
     flt.add_argument("--list", required=True)
     flt.add_argument("--health", required=True)
     flt.add_argument("--status", default="ok", help="comma list: ok,partial,blocked,failed,unchecked")
-    flt.add_argument("--list-name", default="Filtered sources")
+    flt.add_argument("--list-name", default=None,
+                      help="name for the filtered list (default: keep the original list name)")
     flt.add_argument("--out", required=True)
     flt.set_defaults(func=cmd_filter)
 

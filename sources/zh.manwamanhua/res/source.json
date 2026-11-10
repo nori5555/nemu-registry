@@ -2,15 +2,25 @@
 	"info": {
 		"id": "zh.manwamanhua",
 		"name": "漫蛙漫画",
-		"altNames": ["Manwa Manhua"],
-		"version": 1,
+		"altNames": [
+			"Manwa Manhua"
+		],
+		"version": 2,
 		"url": "https://manwadz.cc",
-		"languages": ["zh"],
+		"languages": [
+			"zh"
+		],
 		"contentRating": 2,
 		"minAppVersion": "0.7.1"
 	},
 	"listings": [
-		{"id": "popular", "name": "热门"},
-		{"id": "latest", "name": "最近更新"}
+		{
+			"id": "popular",
+			"name": "热门"
+		},
+		{
+			"id": "latest",
+			"name": "最近更新"
+		}
 	]
 }

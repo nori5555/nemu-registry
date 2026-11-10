@@ -531,6 +531,23 @@
       "maxAppVersion": null
     },
     {
+      "id": "zh.manwamanhua",
+      "name": "漫蛙漫画",
+      "altNames": [
+        "Manwa Manhua"
+      ],
+      "version": 1,
+      "iconURL": "icons/zh.manwamanhua-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manwadz.cc",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "zh.relamanhua",
       "name": "熱辣漫畫",
       "altNames": [],
@@ -603,6 +620,21 @@
       "contentRating": 1,
       "baseURL": "https://www.wenku8.net",
       "minAppVersion": "0.8.5",
+      "maxAppVersion": null
+    },
+    {
+      "id": "zh.suduguu",
+      "name": "速读谷",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/zh.suduguu-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.suduguu-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://www.suduguu.com",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {

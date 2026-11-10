@@ -377,6 +377,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.lagoonscans",
+      "name": "Lagoon Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.lagoonscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.lagoonscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://lagoonscans.com",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.lhtranslation",
       "name": "LHTranslation",
       "altNames": [],
@@ -784,6 +799,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.ravenscans",
+      "name": "Raven Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.ravenscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.ravenscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://ravenscans.org",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.readcomicsonline",
       "name": "Read Comics Online",
       "altNames": [],
@@ -1021,6 +1051,21 @@
       "contentRating": 1,
       "baseURL": "https://manga-oni.com",
       "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "es.manhwaweb",
+      "name": "ManhwaWeb",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/es.manhwaweb-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/es.manhwaweb-v1.aix",
+      "languages": [
+        "es"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manhwaweb.com",
+      "minAppVersion": null,
       "maxAppVersion": null
     },
     {
@@ -3134,6 +3179,23 @@
       "maxAppVersion": null
     },
     {
+      "id": "zh.manwamanhua",
+      "name": "漫蛙漫画",
+      "altNames": [
+        "Manwa Manhua"
+      ],
+      "version": 1,
+      "iconURL": "icons/zh.manwamanhua-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manwadz.cc",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "zh.relamanhua",
       "name": "熱辣漫畫",
       "altNames": [],
@@ -3206,6 +3268,21 @@
       "contentRating": 1,
       "baseURL": "https://www.wenku8.net",
       "minAppVersion": "0.8.5",
+      "maxAppVersion": null
+    },
+    {
+      "id": "zh.suduguu",
+      "name": "速读谷",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/zh.suduguu-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.suduguu-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://www.suduguu.com",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {

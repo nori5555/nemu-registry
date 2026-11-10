@@ -16,6 +16,22 @@
       "contentRating": 2,
       "baseURL": "https://manwa.me",
       "minAppVersion": "0.7.1"
+    },
+    {
+      "id": "zh.manwamanhua",
+      "name": "漫蛙漫画",
+      "altNames": [
+        "Manwa Manhua"
+      ],
+      "version": 1,
+      "iconURL": "icons/zh.manwamanhua-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manwadz.cc",
+      "minAppVersion": "0.7.1"
     }
   ]
 }

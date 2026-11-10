@@ -322,7 +322,7 @@ impl Source for ManwaManhua {
         Ok(updated)
     }
 
-    fn get_page_list(&self, manga: Manga, chapter: Chapter) -> Result<Vec<Page>> {
+    fn get_page_list(&self, _manga: Manga, chapter: Chapter) -> Result<Vec<Page>> {
         let base = base_url();
         let chapter_id = format!("{}", chapter.key.rsplit('/').next().unwrap_or(&chapter.key));
         let referer = format!("{base}/comic/{chapter_id}");
@@ -389,7 +389,7 @@ impl PageImageProcessor for ManwaManhua {
         if !(200..300).contains(&response.code) {
             bail!("漫蛙漫画图片请求失败：HTTP {}", response.code);
         }
-        crypto::image_ref(crypto::decrypt_prepended_iv(response.image.data())?)
+        crypto::image_ref(crypto::decrypt_prepended_iv(&response.image.data())?)
     }
 }
 

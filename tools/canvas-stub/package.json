@@ -1,0 +1,7 @@
+{
+  "name": "canvas",
+  "version": "0.0.0",
+  "description": "stub canvas module so the Aidoku runtime bundles headless",
+  "main": "index.js",
+  "private": true
+}

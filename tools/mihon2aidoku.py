@@ -788,6 +788,13 @@ def cmd_filter(args: argparse.Namespace) -> int:
                             "error": (record["errors"][0]["message"][:160]
                                       if record and record.get("errors") else None)})
 
+    # Icons travel with the filtered list: rewrite to relative names under
+    # out/icons/, which the caller copies next to the index.
+    for entry in kept:
+        icon = entry.get("iconURL") or ""
+        basename = os.path.basename(urllib.parse.urlparse(icon).path)
+        entry["iconURL"] = f"icons/{basename}" if basename else None
+
     index = build_index(meta.get("name") or args.list_name, kept)
     out_dir = os.path.abspath(os.path.expanduser(args.out))
     os.makedirs(out_dir, exist_ok=True)

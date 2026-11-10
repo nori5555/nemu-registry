@@ -43,9 +43,21 @@ jobs:
             --timeout 75 \
             --out health.json
 
+      - name: Build ok-only directory
+        run: |
+          python3 tools/mihon2aidoku.py filter \
+            --list index.json \
+            --health health.json \
+            --status ok \
+            --list-name "Aidoku 实测可用精选" \
+            --out ok
+          rm -rf ok/meta
+          rm -rf ok/icons
+          cp -r icons ok/icons
+
       - name: Publish health report
         run: |
-          git add health.json
+          git add ok/ health.json
           if git diff --cached --quiet; then
             echo "Health unchanged."
             exit 0

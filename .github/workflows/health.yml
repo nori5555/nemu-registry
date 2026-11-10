@@ -30,14 +30,12 @@ jobs:
 
       - name: Build probe runtime (Nemu Aidoku runtime)
         run: |
-          mkdir -p .build-tools
-          cd .build-tools
-          echo '{"name":"build-tools","private":true}' > package.json
+          echo '{"name":"nemu-registry","private":true}' > package.json
           npm install --no-audit --no-fund @nemu.pm/aidoku-runtime@0.15.0 esbuild
-          npx esbuild ../tools/probe_source.mjs \
+          npx esbuild tools/probe_source.mjs \
             --bundle --platform=node --format=cjs --target=node20 \
-            --alias:canvas=../tools/stub-canvas.mjs \
-            --outfile=../tools/probe-runtime.cjs --log-level=warning
+            --alias:canvas=tools/stub-canvas.mjs \
+            --outfile=tools/probe-runtime.cjs --log-level=warning
 
       - name: Probe every source in the index
         run: |

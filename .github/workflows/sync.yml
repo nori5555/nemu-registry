@@ -45,6 +45,9 @@ jobs:
             --out .build \
             --refresh
 
+      - name: Build Chinese-only directory
+        run: python3 tools/build_zh.py --index .build/index.json --icons .build/icons --out zh
+
       - name: Validate output
         run: |
           python3 tools/mihon2aidoku.py verify --list .build/index.json --target nemu
@@ -54,7 +57,7 @@ jobs:
           cp .build/index.json .build/index.min.json .
           rm -rf icons
           cp -r .build/icons icons
-          git add -A index.json index.min.json icons
+          git add -A index.json index.min.json icons zh
           if git diff --cached --quiet; then
             echo "No upstream changes."
             exit 0

@@ -6,7 +6,7 @@
 mod crypto;
 
 use aidoku::{
-    BaseUrlProvider, Chapter, FilterValue, ImageRequestProvider, ImageResponse, Listing,
+    BaseUrlProvider, Chapter, CoverImageProcessor, FilterValue, ImageRequestProvider, ImageResponse, Listing,
     ListingProvider, Manga, MangaPageResult, MangaStatus, Page, PageContent, PageContext,
     PageImageProcessor, Result, Source,
     alloc::{String, Vec, format, vec},
@@ -330,7 +330,7 @@ impl Source for ManwaManhua {
         let mut page_no = 1;
         loop {
             let url = format!(
-                "{base}/api/comic/image?chapter_id={chapter_id}&page={page_no}&page_size={IMAGE_PAGE_SIZE}&image_source="
+                "{base}/api/comic/image/{chapter_id}?page={page_no}&page_size={IMAGE_PAGE_SIZE}&image_source="
             );
             let data: Response<ImagePage> = get_json(&url, &referer)?;
             let total_pages = data.data.pagination.as_ref().map(|p| p.total_pages).unwrap_or(1).max(1);
@@ -384,6 +384,16 @@ impl ImageRequestProvider for ManwaManhua {
     }
 }
 
+impl aidoku::CoverImageProcessor for ManwaManhua {
+    fn process_cover_image(&self, response: ImageResponse) -> Result<ImageRef> {
+        if !(200..300).contains(&response.code) {
+            bail!("漫蛙漫画封面请求失败：HTTP {}", response.code);
+        }
+        // Covers live under the same /en_images/ encrypted path as page images.
+        crypto::image_ref(crypto::decrypt_prepended_iv(&response.image.data())?)
+    }
+}
+
 impl PageImageProcessor for ManwaManhua {
     fn process_page_image(&self, response: ImageResponse, _context: Option<PageContext>) -> Result<ImageRef> {
         if !(200..300).contains(&response.code) {
@@ -393,4 +403,4 @@ impl PageImageProcessor for ManwaManhua {
     }
 }
 
-register_source!(ManwaManhua, ListingProvider, BaseUrlProvider, ImageRequestProvider, PageImageProcessor);
+register_source!(ManwaManhua, ListingProvider, BaseUrlProvider, ImageRequestProvider, PageImageProcessor, CoverImageProcessor);

@@ -18,6 +18,7 @@ import hashlib
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import unicodedata
@@ -631,6 +632,174 @@ def diff_lists(old: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, Any]:
         "added": added, "removed": removed, "updated": updated,
     }
 
+# ------------------------------------------------------------ runtime probing
+PROBE_BUNDLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "probe-runtime.cjs")
+
+
+def classify_probe(report: Dict[str, Any]) -> str:
+    """Turn a probe report into a coarse status.
+
+    ok       every core stage worked
+    partial  search worked, details/chapters/pages did not
+    blocked  Cloudflare or an HTTP 4xx wall in front of the source
+    failed   nothing usable
+    """
+    stages = report.get("stages") or {}
+    core = ("search", "details", "chapters", "pages")
+    if report.get("ok") or all(stages.get(s) for s in core):
+        return "ok"
+    text = " ".join(str(e.get("message", "")) for e in report.get("errors") or []).lower()
+    if "cloudflare" in text or "challenge" in text or "captcha" in text:
+        return "blocked"
+    if re.search(r"\b(400|403|429|451)\b|bad request|forbidden|too many requests", text):
+        return "blocked"
+    if "no results" in text:
+        return "empty"
+    if stages.get("search"):
+        return "partial"
+    return "failed"
+
+
+def probe_source(entry: Dict[str, Any], cache_dir: Optional[str], query: str,
+                 image: bool, timeout: int, node: str, refresh: bool) -> Dict[str, Any]:
+    started = time.time()
+    record: Dict[str, Any] = {
+        "id": entry["id"],
+        "name": entry.get("name"),
+        "version": entry.get("version"),
+        "downloadURL": entry.get("downloadURL"),
+    }
+    aix_path = None
+    try:
+        if not os.path.exists(PROBE_BUNDLE):
+            raise RuntimeError(f"missing probe runtime: {PROBE_BUNDLE}")
+        data = fetch(entry["downloadURL"], cache_dir, refresh)
+        aix_dir = os.path.join(cache_dir or "/tmp", "aix")
+        os.makedirs(aix_dir, exist_ok=True)
+        aix_path = os.path.join(aix_dir, re.sub(r"[^A-Za-z0-9._-]", "_", entry["id"]) + ".aix")
+        with open(aix_path, "wb") as fh:
+            fh.write(data)
+        cmd = [node, PROBE_BUNDLE, aix_path, entry["id"], query, f"--timeout-ms={timeout * 1000}"]
+        if image:
+            cmd.append("--image")
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout + 15)
+        payload = None
+        for line in reversed((proc.stdout or "").strip().splitlines()):
+            line = line.strip()
+            if line.startswith("{"):
+                try:
+                    payload = json.loads(line)
+                    break
+                except json.JSONDecodeError:
+                    continue
+        if payload is None:
+            raise RuntimeError((proc.stderr or proc.stdout or "no probe output").strip()[-400:])
+        record.update(payload)
+    except subprocess.TimeoutExpired:
+        record.update({"ok": False, "stages": {}, "errors": [{"stage": "timeout",
+                        "message": f"probe exceeded {timeout}s"}]})
+    except Exception as exc:  # noqa: BLE001
+        record.update({"ok": False, "stages": {}, "errors": [{"stage": "probe",
+                        "message": str(exc)[:400]}]})
+    finally:
+        if aix_path and os.path.exists(aix_path):
+            try:
+                os.unlink(aix_path)
+            except OSError:
+                pass
+    record["status"] = classify_probe(record)
+    record["checkedAt"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    record["elapsedMs"] = int((time.time() - started) * 1000)
+    return record
+
+
+def cmd_probe(args: argparse.Namespace) -> int:
+    payload = load_json_bytes(fetch(args.list), args.list)
+    _, entries = parse_aidoku(payload, args.list)
+    if args.only:
+        wanted = {x.strip() for x in args.only.split(",") if x.strip()}
+        entries = [e for e in entries if e["id"] in wanted]
+    if args.limit:
+        entries = entries[: args.limit]
+    if not entries:
+        print(json.dumps({"ok": False, "error": "no sources selected"}, ensure_ascii=False))
+        return 2
+    cache_dir = args.cache_dir or os.path.join(os.path.dirname(os.path.abspath(args.list)), ".cache")
+
+    results: List[Dict[str, Any]] = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        futures = {
+            pool.submit(probe_source, entry, cache_dir, args.query, args.image,
+                        args.timeout, args.node, args.refresh): entry["id"]
+            for entry in entries
+        }
+        for future in concurrent.futures.as_completed(futures):
+            results.append(future.result())
+            done = len(results)
+            if args.progress and done % 10 == 0:
+                print(f"progress {done}/{len(entries)}", file=sys.stderr)
+    results.sort(key=lambda r: (r["status"], r["id"]))
+
+    summary = {
+        "total": len(results),
+        "ok": sum(1 for r in results if r["status"] == "ok"),
+        "partial": sum(1 for r in results if r["status"] == "partial"),
+        "blocked": sum(1 for r in results if r["status"] == "blocked"),
+        "empty": sum(1 for r in results if r["status"] == "empty"),
+        "failed": sum(1 for r in results if r["status"] == "failed"),
+    }
+    report = {
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "query": args.query,
+        "imageCheck": args.image,
+        "summary": summary,
+        "results": results,
+    }
+    if args.out:
+        write_json(args.out, report)
+    print(json.dumps({
+        "ok": summary["ok"] > 0,
+        **summary,
+        "out": args.out,
+        "failures": [
+            {"id": r["id"], "status": r["status"],
+             "error": (r["errors"][0]["message"][:120] if r.get("errors") else "")}
+            for r in results if r["status"] != "ok"
+        ][: args.show_failures],
+    }, ensure_ascii=False, indent=2))
+    return 0
+
+
+def cmd_filter(args: argparse.Namespace) -> int:
+    payload = load_json_bytes(fetch(args.list), args.list)
+    meta, entries = parse_aidoku(payload, args.list)
+    health = load_json_bytes(fetch(args.health), args.health)
+    by_id = {r["id"]: r for r in health.get("results") or []}
+    keep = {x.strip() for x in args.status.split(",") if x.strip()}
+
+    kept, dropped = [], []
+    for entry in entries:
+        record = by_id.get(entry["id"])
+        status = record["status"] if record else "unchecked"
+        if status in keep:
+            kept.append(entry)
+        else:
+            dropped.append({"id": entry["id"], "name": entry["name"], "status": status,
+                            "error": (record["errors"][0]["message"][:160]
+                                      if record and record.get("errors") else None)})
+
+    index = build_index(meta.get("name") or args.list_name, kept)
+    out_dir = os.path.abspath(os.path.expanduser(args.out))
+    os.makedirs(out_dir, exist_ok=True)
+    write_json(os.path.join(out_dir, "index.json"), index)
+    write_json(os.path.join(out_dir, "index.min.json"), index, minify=True)
+    write_json(os.path.join(out_dir, "meta", "dropped.json"),
+               {"generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "kept": len(kept), "dropped": dropped})
+    print(json.dumps({"ok": True, "kept": len(kept), "dropped": len(dropped),
+                      "out": out_dir, "statuses": sorted(keep)}, ensure_ascii=False, indent=2))
+    return 0
+
 
 # ----------------------------------------------------------------------- CLI
 def cmd_convert(args: argparse.Namespace) -> int:
@@ -787,6 +956,30 @@ def build_parser() -> argparse.ArgumentParser:
     conv.add_argument("--refresh", action="store_true", help="ignore cached downloads")
     conv.set_defaults(func=cmd_convert)
 
+    prb = sub.add_parser("probe", help="run each source through the Aidoku WASM runtime")
+    prb.add_argument("--list", required=True, help="index.json to probe")
+    prb.add_argument("--out", default=None, help="write the full health report here")
+    prb.add_argument("--only", default=None, help="comma-separated source ids")
+    prb.add_argument("--limit", type=int, default=0)
+    prb.add_argument("--query", default="one piece", help="search query used for the probe")
+    prb.add_argument("--image", action="store_true", help="also fetch cover and first page image")
+    prb.add_argument("--workers", type=int, default=3)
+    prb.add_argument("--timeout", type=int, default=90, help="per-source seconds")
+    prb.add_argument("--node", default="node")
+    prb.add_argument("--cache-dir", default=None)
+    prb.add_argument("--refresh", action="store_true")
+    prb.add_argument("--progress", action="store_true")
+    prb.add_argument("--show-failures", type=int, default=20)
+    prb.set_defaults(func=cmd_probe)
+
+    flt = sub.add_parser("filter", help="keep only sources that passed a health report")
+    flt.add_argument("--list", required=True)
+    flt.add_argument("--health", required=True)
+    flt.add_argument("--status", default="ok", help="comma list: ok,partial,blocked,failed,unchecked")
+    flt.add_argument("--list-name", default="Filtered sources")
+    flt.add_argument("--out", required=True)
+    flt.set_defaults(func=cmd_filter)
+
     dif = sub.add_parser("diff", help="compare two Aidoku source lists")
     dif.add_argument("--old", required=True)
     dif.add_argument("--new", required=True)
@@ -805,7 +998,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Optional[List[str]] = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     parser = build_parser()
-    commands = {"convert", "diff", "verify"}
+    commands = {"convert", "diff", "verify", "probe", "filter"}
     if not any(token in commands for token in argv[:1]) and not (argv and argv[0] in commands):
         argv.insert(0, "convert")
     if not argv:

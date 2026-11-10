@@ -149,7 +149,7 @@ fn get_json<T: for<'de> Deserialize<'de>>(url: &str, referer: &str) -> Result<T>
     if !(200..300).contains(&code) {
         bail!("漫蛙漫画接口返回 HTTP {}，站点可能换了域名（mwmw.cc 有最新地址）", code);
     }
-    let bytes = response.data().map_err(|_| error!("漫蛙漫画接口没有返回内容"))?;
+    let bytes = response.get_data().map_err(|_| error!("漫蛙漫画接口没有返回内容"))?;
     serde_json::from_slice(&bytes).map_err(|_| error!("漫蛙漫画接口返回的不是预期 JSON"))
 }
 
@@ -164,7 +164,7 @@ fn post_json<T: for<'de> Deserialize<'de>>(url: &str, body: &str, referer: &str)
     if !(200..300).contains(&code) {
         bail!("漫蛙漫画分类接口返回 HTTP {}", code);
     }
-    let bytes = response.data().map_err(|_| error!("漫蛙漫画分类接口没有返回内容"))?;
+    let bytes = response.get_data().map_err(|_| error!("漫蛙漫画分类接口没有返回内容"))?;
     serde_json::from_slice(&bytes).map_err(|_| error!("漫蛙漫画分类接口返回的不是预期 JSON"))
 }
 
@@ -233,7 +233,7 @@ fn listing_page(
         }
         None => {
             let mut filters_vec: Vec<FilterValue> = filters.to_vec();
-            filters_vec.push(FilterValue::Select { id: "sort".into(), value: sort.to_string() });
+            filters_vec.push(FilterValue::Select { id: "sort".into(), value: format!("{}", sort) });
             let body = cate_body(page, &filters_vec);
             let data: Response<List<ComicItem>> = post_json(&format!("{base}/api/cate"), &body, &referer)?;
             Ok(MangaPageResult {
@@ -245,8 +245,8 @@ fn listing_page(
 }
 
 fn to_manga(item: ComicItem) -> Option<Manga> {
-    let key = item.id.map(|id| id.to_string()).or_else(|| {
-        item.url.as_deref().map(|u| u.trim_end_matches('/').rsplit('/').next().unwrap_or(u).to_string())
+    let key = item.id.map(|id| format!("{}", id)).or_else(|| {
+        item.url.as_deref().map(|u| format!("{}", u.trim_end_matches('/').rsplit('/').next().unwrap_or(u)))
     })?;
     if key.is_empty() {
         return None;
@@ -311,20 +311,20 @@ impl Source for ManwaManhua {
             let mut list = data.data.list;
             list.sort_by(|a, b| b.sort_id.partial_cmp(&a.sort_id).unwrap_or(core::cmp::Ordering::Equal)
                 .then_with(|| b.id.cmp(&a.id)));
-            updated.chapters = list.into_iter().map(|c| Chapter {
+            updated.chapters = Some(list.into_iter().map(|c| Chapter {
                 key: format!("{}/{}", c.comic_id, c.id),
                 title: Some(c.title),
                 chapter_number: None,
                 date_uploaded: (c.create_time > 0).then_some(c.create_time * 1000),
                 ..Default::default()
-            }).collect();
+            }).collect());
         }
         Ok(updated)
     }
 
     fn get_page_list(&self, manga: Manga, chapter: Chapter) -> Result<Vec<Page>> {
         let base = base_url();
-        let chapter_id = chapter.key.rsplit('/').next().unwrap_or(&chapter.key).to_string();
+        let chapter_id = format!("{}", chapter.key.rsplit('/').next().unwrap_or(&chapter.key));
         let referer = format!("{base}/comic/{chapter_id}");
         let mut pages: Vec<Page> = Vec::new();
         let mut page_no = 1;

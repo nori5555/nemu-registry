@@ -21,7 +21,7 @@ pub fn is_image(data: &[u8]) -> bool {
         || (data.len() >= 12 && &data[..4] == b"RIFF" && &data[8..12] == b"WEBP")
 }
 
-pub fn decrypt_prepended_iv(data: &[u8]) -> Result<Vec> {
+pub fn decrypt_prepended_iv(data: &[u8]) -> Result<Vec<u8>> {
     use aes::Aes256;
     use cbc::cipher::{BlockDecryptMut, KeyIvInit, block_padding::NoPadding};
 
@@ -43,6 +43,6 @@ pub fn decrypt_prepended_iv(data: &[u8]) -> Result<Vec> {
     Ok(buffer)
 }
 
-pub fn image_ref(bytes: Vec) -> Result<ImageRef> {
+pub fn image_ref(bytes: Vec<u8>) -> Result<ImageRef> {
     Ok(ImageRef::new(&bytes))
 }

@@ -33,7 +33,8 @@ jobs:
             https://raw.githubusercontent.com/Aidoku-Community/legacy-sources/gh-pages/index.min.json,
             https://raw.githubusercontent.com/AlanLang/aidoku-sources/gh-pages/index.min.json,
             https://raw.githubusercontent.com/Moomooo95/aidoku-french-sources/gh-pages/index.min.json,
-            https://raw.githubusercontent.com/beer-psi/aidoku-ln-sources/gh-pages/index.min.json
+            https://raw.githubusercontent.com/beer-psi/aidoku-ln-sources/gh-pages/index.min.json,
+            https://nori5555.github.io/nemu-registry/published/index.min.json
         run: |
           python3 tools/mihon2aidoku.py convert \
             --input "$MIHON_INDEX" \

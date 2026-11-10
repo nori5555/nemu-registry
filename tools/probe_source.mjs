@@ -10,12 +10,19 @@
  */
 
 import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { dirname, join } from "node:path";
 import { loadSource } from "@nemu.pm/aidoku-runtime";
+import { PROBE_SCHEMA, strictPass, queryFor, imagePositions } from './probe_contract.mjs';
 
 const argv = process.argv.slice(2);
 const positional = argv.filter((a) => !a.startsWith("--"));
 const flags = new Set(argv.filter((a) => a.startsWith("--")));
-const [aixPath, sourceKey, query = "one piece"] = positional;
+const [aixPath, sourceKey, suppliedQuery = 'auto'] = positional;
+const settingsArg = argv.find(a => a.startsWith('--settings-file='));
+const sourceSettings = settingsArg ? JSON.parse(readFileSync(settingsArg.split('=').slice(1).join('='), 'utf8')) : {};
+const decoder = join(dirname(process.argv[1]), 'probe_image_decode.py');
+let query = suppliedQuery;
 const wantImage = flags.has("--image");
 const timeoutArg = argv.find((a) => a.startsWith("--timeout-ms="));
 const timeoutMs = timeoutArg ? Number(timeoutArg.split("=")[1]) : 45000;
@@ -30,6 +37,10 @@ if (!aixPath || !sourceKey) {
 let srcRef = null;
 const result = {
   ok: false,
+  probeSchema: PROBE_SCHEMA,
+  imageCheck: wantImage,
+  environment: 'node-headless-direct',
+  mobileVerified: false,
   id: sourceKey,
   manifest: {},
   stages: {},
@@ -75,36 +86,48 @@ function imageKind(bytes) {
   return "unknown:" + Buffer.from(b.slice(0, 4)).toString("hex");
 }
 
-async function fetchImage(url, headers) {
-  let finalUrl = url;
-  let finalHeaders = headers || {};
-  try {
-    const modified = await srcRef.modifyImageRequest(url, null);
-    if (modified?.url) finalUrl = modified.url;
-    finalHeaders = { ...finalHeaders, ...(modified?.headers || {}) };
-  } catch {
-    // sources without an image request provider: use the page headers as-is
+async function fetchImage(url, headers, context = null, cover = false) {
+  const modified = await srcRef.modifyImageRequest(url, context);
+  const finalUrl = modified?.url || url;
+  const finalHeaders = { ...(headers || {}), ...(modified?.headers || {}) };
+  const res = await fetch(finalUrl, { headers: finalHeaders, redirect: 'follow',
+                                    signal: AbortSignal.timeout(Math.min(timeoutMs, 20000)) });
+  if (!res.ok) throw new Error(`image HTTP ${res.status}`);
+  const chunks = []; let size = 0;
+  for await (const chunk of res.body) {
+    size += chunk.length;
+    if (size > 25 * 1024 * 1024) throw new Error('image exceeds 25 MiB');
+    chunks.push(chunk);
   }
-  const res = await withTimeout(
-    fetch(finalUrl, { headers: finalHeaders, redirect: "follow" }),
-    timeoutMs,
-    "image fetch"
-  );
-  const buffer = new Uint8Array(await res.arrayBuffer());
-  return {
-    status: res.status,
-    contentType: res.headers.get("content-type") || "",
-    bytes: buffer.length,
-    kind: imageKind(buffer),
-  };
+  const original = new Uint8Array(Buffer.concat(chunks));
+  let processed = original;
+  const responseHeaders = Object.fromEntries(res.headers.entries());
+  const hasProcessor = cover ? await srcRef.hasCoverImageProcessor() : await srcRef.hasImageProcessor();
+  if (hasProcessor) {
+    processed = cover
+      ? await srcRef.processCoverImage(original, finalUrl, finalHeaders, res.status, responseHeaders)
+      : await srcRef.processPageImage(original, context, finalUrl, finalHeaders, res.status, responseHeaders);
+    if (!processed?.length) throw new Error('image processor returned no bytes');
+  }
+  const decoded = spawnSync(process.env.PYTHON || 'python3', [decoder], {
+    input: Buffer.from(processed), encoding: 'utf8', timeout: 15000, maxBuffer: 1024 * 1024,
+  });
+  let info;
+  try { info = JSON.parse(decoded.stdout); }
+  catch { throw new Error(`image decoder failed: ${decoded.stderr || decoded.error || 'no result'}`); }
+  if (decoded.status !== 0 || !info.ok) throw new Error(`image decode failed: ${info.error}`);
+  return { status: res.status, contentType: res.headers.get('content-type'),
+           downloadedBytes: original.length, processed: hasProcessor, ...info };
 }
 
 async function main() {
   const bytes = new Uint8Array(readFileSync(aixPath));
-  const src = await loadSource(bytes, sourceKey, {});
+  const src = await loadSource(bytes, sourceKey, { settings: { get: () => sourceSettings } });
   srcRef = src;
   result.id = src.id;
   const info = src.manifest?.info || {};
+  query = queryFor(info, suppliedQuery);
+  result.query = query;
   result.manifest = {
     name: info.name,
     version: info.version,
@@ -145,7 +168,8 @@ async function main() {
       result.stages.listingBrowse = true;
       manga = browse.first;
     } else {
-      result.errors.push({ stage: "search", message: `search returned no results for "${query}"` });
+      if (search !== null && search.count === 0)
+        result.errors.push({ stage: "search", message: `search returned no results for "${query}"` });
       return result;
     }
   }
@@ -170,8 +194,9 @@ async function main() {
 
   if (wantImage && detail?.cover) {
     result.stages.coverImage = await record("coverImage", async () => {
-      const img = await fetchImage(String(detail.raw?.cover));
-      return img.status === 200 && img.bytes > 500 ? img : null;
+      const img = await fetchImage(String(detail.raw?.cover), {}, null, true);
+      result.sample.coverImage = img;
+      return img.ok;
     }).then(Boolean);
   }
 
@@ -193,17 +218,15 @@ async function main() {
       result.sample.pageUrl = String(pages.first.url).slice(0, 300);
       if (wantImage) {
         result.stages.pageImage = await record("pageImage", async () => {
-          const img = await fetchImage(pages.first.url, pages.first.headers);
+          const img = await fetchImage(pages.first.url, pages.first.headers, pages.first.context || null);
           result.sample.pageImage = img;
-          return img.status === 200 && img.bytes > 1000 &&
-            !String(img.contentType).includes("text/html") ? img : null;
+          return img.ok;
         }).then(Boolean);
       }
     }
   }
 
-  const required = ["search", "details", "chapters", "pages"];
-  result.ok = required.every((stage) => result.stages[stage]);
+  result.ok = strictPass(result);
   return result;
 }
 

@@ -645,8 +645,8 @@ def classify_probe(report: Dict[str, Any]) -> str:
     failed   nothing usable
     """
     stages = report.get("stages") or {}
-    core = ("search", "details", "chapters", "pages")
-    if report.get("ok") or all(stages.get(s) for s in core):
+    # probe v2: "ok" requires image checks; a URL-only pass is not readable content.
+    if report.get("ok") and report.get("imageCheck") is True:
         return "ok"
     text = " ".join(str(e.get("message", "")) for e in report.get("errors") or []).lower()
     if "cloudflare" in text or "challenge" in text or "captcha" in text:

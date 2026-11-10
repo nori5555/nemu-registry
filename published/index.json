@@ -1,0 +1,21 @@
+{
+  "name": "nori 自建移植源",
+  "sources": [
+    {
+      "id": "zh.manwa",
+      "name": "漫蛙",
+      "altNames": [
+        "Manwa"
+      ],
+      "version": 1,
+      "iconURL": "icons/zh.manwa-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/sources/zh.manwa-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manwa.me",
+      "minAppVersion": "0.7.1"
+    }
+  ]
+}

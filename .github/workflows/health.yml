@@ -38,9 +38,10 @@ jobs:
         run: |
           python3 tools/mihon2aidoku.py probe \
             --list index.json \
-            --query manga \
-            --workers 4 \
-            --timeout 75 \
+            --query auto \
+            --image \
+            --workers 3 \
+            --timeout 90 \
             --out health.json
 
       - name: Build ok-only directory

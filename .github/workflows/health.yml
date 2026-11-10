@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p .build-tools
           cd .build-tools
-          npm init -y > /dev/null
+          echo '{"name":"build-tools","private":true}' > package.json
           npm install --no-audit --no-fund @nemu.pm/aidoku-runtime@0.15.0 esbuild
           npx esbuild ../tools/probe_source.mjs \
             --bundle --platform=node --format=cjs --target=node20 \

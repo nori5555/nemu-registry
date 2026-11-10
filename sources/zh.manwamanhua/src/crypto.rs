@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: Apache-2.0
 // Port of Keiyoushi `ManwaManhua` (see NOTICE). No website JavaScript is executed.
 //
-// The site encrypts reader images: AES-256-CBC with the IV prepended to the
-// payload (first 16 bytes), key given below. Decryption happens in
-// `process_page_image`, so the host never needs a canvas.
+// Reader and cover images are AES-256-CBC with the IV prepended (first 16 bytes).
+// They are decrypted in-source and handed to the host as `data:` URLs, so no
+// host canvas / image processor is involved (that path is unreliable on mobile).
 
 use aidoku::{
-    Result, alloc::Vec,
-    imports::canvas::ImageRef,
+    Result, alloc::{String, Vec, format},
     prelude::*,
 };
+use base64::Engine;
+use base64::engine::general_purpose::STANDARD as B64;
 
 const KEY: &[u8; 32] = b"0B6666A0-BB59-1381-B746-a0E4C9AC";
 
@@ -21,11 +22,18 @@ pub fn is_image(data: &[u8]) -> bool {
         || (data.len() >= 12 && &data[..4] == b"RIFF" && &data[8..12] == b"WEBP")
 }
 
-pub fn decrypt_prepended_iv(data: &[u8]) -> Result<Vec<u8>> {
+pub fn mime_of(data: &[u8]) -> &'static str {
+    if data.starts_with(b"\xff\xd8\xff") { "image/jpeg" }
+    else if data.starts_with(b"\x89PNG") { "image/png" }
+    else if data.starts_with(b"GIF") { "image/gif" }
+    else if data.len() >= 12 && &data[..4] == b"RIFF" { "image/webp" }
+    else { "application/octet-stream" }
+}
+
+pub fn decrypt(data: &[u8]) -> Result<Vec<u8>> {
     use aes::Aes256;
     use cbc::cipher::{BlockDecryptMut, KeyIvInit, block_padding::NoPadding};
 
-    // Mirrors from time to time serve already-decoded bytes; keep idempotent.
     if is_image(data) {
         return Ok(data.to_vec());
     }
@@ -43,6 +51,8 @@ pub fn decrypt_prepended_iv(data: &[u8]) -> Result<Vec<u8>> {
     Ok(buffer)
 }
 
-pub fn image_ref(bytes: Vec<u8>) -> Result<ImageRef> {
-    Ok(ImageRef::new(&bytes))
+/// Decrypt (when needed) and inline as a data URL the client can render directly.
+pub fn data_url(data: &[u8]) -> Result<String> {
+    let bytes = decrypt(data)?;
+    Ok(format!("data:{};base64,{}", mime_of(&bytes), B64.encode(&bytes)))
 }

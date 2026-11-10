@@ -6,12 +6,11 @@
 mod crypto;
 
 use aidoku::{
-    BaseUrlProvider, Chapter, CoverImageProcessor, FilterValue, ImageRequestProvider, ImageResponse, Listing,
+    BaseUrlProvider, Chapter, FilterValue, Listing,
     ListingProvider, Manga, MangaPageResult, MangaStatus, Page, PageContent, PageContext,
-    PageImageProcessor, Result, Source,
+    Result, Source,
     alloc::{String, Vec, format, vec},
     imports::{
-        canvas::ImageRef,
         defaults::defaults_get,
         net::Request,
     },
@@ -283,7 +282,9 @@ impl Source for ManwaManhua {
             let data: Response<ComicDetail> = get_json(&format!("{base}/api/comic/{}", manga.key), &referer)?;
             let detail = data.data;
             updated.title = detail.title;
-            updated.cover = Some(detail.cover);
+            // Inline the cover: the host's image-processor path is unreliable on
+            // mobile, and the bytes are AES-CBC encrypted at rest.
+            updated.cover = fetch_inline(&detail.cover, &referer).or(Some(detail.cover.clone()));
             updated.authors = (!detail.author.is_empty()).then(|| vec![detail.author]);
             updated.status = match detail.status {
                 1 => MangaStatus::Ongoing,
@@ -335,14 +336,11 @@ impl Source for ManwaManhua {
             let data: Response<ImagePage> = get_json(&url, &referer)?;
             let total_pages = data.data.pagination.as_ref().map(|p| p.total_pages).unwrap_or(1).max(1);
             for image in data.data.images.into_iter().filter(|i| i.width != -1) {
-                pages.push(Page {
-                    content: {
-                        let mut context = PageContext::new();
-                        context.insert("referer".into(), referer.clone());
-                        PageContent::url_context(image.url, context)
-                    },
-                    ..Default::default()
-                });
+                let url = match fetch_inline(&image.url, &referer) {
+                    Some(data_url) => data_url,
+                    None => image.url,
+                };
+                pages.push(Page { content: PageContent::url(url), ..Default::default() });
             }
             if page_no >= total_pages || page_no > 50 {
                 break;
@@ -371,36 +369,17 @@ impl BaseUrlProvider for ManwaManhua {
     fn get_base_url(&self) -> Result<String> { Ok(base_url()) }
 }
 
-impl ImageRequestProvider for ManwaManhua {
-    fn get_image_request(&self, url: String, context: Option<PageContext>) -> Result<Request> {
-        let base = base_url();
-        let referer = context
-            .as_ref()
-            .and_then(|c| c.get("referer"))
-            .filter(|s| s.starts_with("https://") || s.starts_with("http://"))
-            .cloned()
-            .unwrap_or_else(|| format!("{base}/"));
-        Ok(Request::get(&url)?.header("Referer", &referer))
+fn fetch_inline(url: &str, referer: &str) -> Option<String> {
+    if url.is_empty() {
+        return None;
     }
+    let response = Request::get(url).ok()?.header("Referer", referer).send().ok()?;
+    if !(200..300).contains(&response.status_code()) {
+        return None;
+    }
+    let bytes = response.get_data().ok()?;
+    crypto::data_url(&bytes).ok()
 }
 
-impl aidoku::CoverImageProcessor for ManwaManhua {
-    fn process_cover_image(&self, response: ImageResponse) -> Result<ImageRef> {
-        if !(200..300).contains(&response.code) {
-            bail!("漫蛙漫画封面请求失败：HTTP {}", response.code);
-        }
-        // Covers live under the same /en_images/ encrypted path as page images.
-        crypto::image_ref(crypto::decrypt_prepended_iv(&response.image.data())?)
-    }
-}
+register_source!(ManwaManhua, ListingProvider, BaseUrlProvider);
 
-impl PageImageProcessor for ManwaManhua {
-    fn process_page_image(&self, response: ImageResponse, _context: Option<PageContext>) -> Result<ImageRef> {
-        if !(200..300).contains(&response.code) {
-            bail!("漫蛙漫画图片请求失败：HTTP {}", response.code);
-        }
-        crypto::image_ref(crypto::decrypt_prepended_iv(&response.image.data())?)
-    }
-}
-
-register_source!(ManwaManhua, ListingProvider, BaseUrlProvider, ImageRequestProvider, PageImageProcessor, CoverImageProcessor);

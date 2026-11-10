@@ -11,6 +11,7 @@ aes = { version = "=0.8.4", default-features = false }
 cbc = { version = "=0.1.2", default-features = false, features = ["block-padding"] }
 serde = { version = "1", default-features = false, features = ["derive"] }
 serde_json = { version = "1", default-features = false }
+base64 = { version = "0.22", default-features = false, features = ["alloc"] }
 
 [lib]
 crate-type = ["cdylib"]

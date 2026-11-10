@@ -7,7 +7,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.kks101-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.kks101-v1.aix",
+      "downloadURL": "sources/zh.kks101-v1.aix",
       "languages": [
         "zh"
       ],
@@ -22,7 +22,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.18mh-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.18mh-v1.aix",
+      "downloadURL": "sources/zh.18mh-v1.aix",
       "languages": [
         "zh"
       ],
@@ -37,7 +37,7 @@
       "altNames": [],
       "version": 9,
       "iconURL": "icons/zh.godamanga-v9.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.godamanga-v9.aix",
+      "downloadURL": "sources/zh.godamanga-v9.aix",
       "languages": [
         "zh"
       ],
@@ -52,7 +52,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.hanime1-v3.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.hanime1-v3.aix",
+      "downloadURL": "sources/zh.hanime1-v3.aix",
       "languages": [
         "zh"
       ],
@@ -67,7 +67,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.ho5ho-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.ho5ho-v1.aix",
+      "downloadURL": "sources/zh.ho5ho-v1.aix",
       "languages": [
         "zh"
       ],
@@ -82,7 +82,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.komiic-v3.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.komiic-v3.aix",
+      "downloadURL": "sources/zh.komiic-v3.aix",
       "languages": [
         "zh"
       ],
@@ -97,7 +97,7 @@
       "altNames": [],
       "version": 10,
       "iconURL": "icons/zh.manhuagui-v10.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.manhuagui-v10.aix",
+      "downloadURL": "sources/zh.manhuagui-v10.aix",
       "languages": [
         "zh"
       ],
@@ -112,7 +112,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.mycomic-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.mycomic-v3.aix",
+      "downloadURL": "sources/zh.mycomic-v3.aix",
       "languages": [
         "zh"
       ],
@@ -127,7 +127,7 @@
       "altNames": [],
       "version": 6,
       "iconURL": "icons/zh.mangabz-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.mangabz-v6.aix",
+      "downloadURL": "sources/zh.mangabz-v6.aix",
       "languages": [
         "zh"
       ],
@@ -142,7 +142,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.noyacg-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.noyacg-v3.aix",
+      "downloadURL": "sources/zh.noyacg-v3.aix",
       "languages": [
         "zh"
       ],
@@ -157,7 +157,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.noy1-v3.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.noy1-v3.aix",
+      "downloadURL": "sources/zh.noy1-v3.aix",
       "languages": [
         "zh"
       ],
@@ -172,7 +172,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.zerobyw-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.zerobyw-v1.aix",
+      "downloadURL": "sources/zh.zerobyw-v1.aix",
       "languages": [
         "zh"
       ],
@@ -187,7 +187,7 @@
       "altNames": [],
       "version": 8,
       "iconURL": "icons/zh.zerobywns-v8.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.zerobywns-v8.aix",
+      "downloadURL": "sources/zh.zerobywns-v8.aix",
       "languages": [
         "zh"
       ],
@@ -202,7 +202,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.rumanhua-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.rumanhua-v1.aix",
+      "downloadURL": "sources/zh.rumanhua-v1.aix",
       "languages": [
         "zh"
       ],
@@ -217,7 +217,7 @@
       "altNames": [],
       "version": 7,
       "iconURL": "icons/zh.zaimanhua-v7.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.zaimanhua-v7.aix",
+      "downloadURL": "sources/zh.zaimanhua-v7.aix",
       "languages": [
         "zh"
       ],
@@ -232,7 +232,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.zaimanhuanovel-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.zaimanhuanovel-v1.aix",
+      "downloadURL": "sources/zh.zaimanhuanovel-v1.aix",
       "languages": [
         "zh"
       ],
@@ -247,7 +247,7 @@
       "altNames": [],
       "version": 4,
       "iconURL": "icons/zh.dm5-v4.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.dm5-v4.aix",
+      "downloadURL": "sources/zh.dm5-v4.aix",
       "languages": [
         "zh"
       ],
@@ -262,7 +262,7 @@
       "altNames": [],
       "version": 2,
       "iconURL": "icons/zh.cartoonmad-v2.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.cartoonmad-v2.aix",
+      "downloadURL": "sources/zh.cartoonmad-v2.aix",
       "languages": [
         "zh"
       ],
@@ -277,7 +277,7 @@
       "altNames": [],
       "version": 5,
       "iconURL": "icons/zh.baozimh1-v5.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.baozimh1-v5.aix",
+      "downloadURL": "sources/zh.baozimh1-v5.aix",
       "languages": [
         "zh"
       ],
@@ -292,7 +292,7 @@
       "altNames": [],
       "version": 6,
       "iconURL": "icons/zh.baozimh2-v6.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.baozimh2-v6.aix",
+      "downloadURL": "sources/zh.baozimh2-v6.aix",
       "languages": [
         "zh"
       ],
@@ -307,7 +307,7 @@
       "altNames": [],
       "version": 7,
       "iconURL": "icons/zh.baozimanhua-v7.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.baozimanhua-v7.aix",
+      "downloadURL": "sources/zh.baozimanhua-v7.aix",
       "languages": [
         "zh"
       ],
@@ -322,7 +322,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.gufengmh-v3.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.gufengmh-v3.aix",
+      "downloadURL": "sources/zh.gufengmh-v3.aix",
       "languages": [
         "zh"
       ],
@@ -337,7 +337,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.manhuabika-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.manhuabika-v1.aix",
+      "downloadURL": "sources/zh.manhuabika-v1.aix",
       "languages": [
         "zh"
       ],
@@ -352,7 +352,7 @@
       "altNames": [],
       "version": 4,
       "iconURL": "icons/zh.bilicomic-v4.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.bilicomic-v4.aix",
+      "downloadURL": "sources/zh.bilicomic-v4.aix",
       "languages": [
         "zh"
       ],
@@ -367,7 +367,7 @@
       "altNames": [],
       "version": 2,
       "iconURL": "icons/zh.bilinovel-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.bilinovel-v2.aix",
+      "downloadURL": "sources/zh.bilinovel-v2.aix",
       "languages": [
         "zh"
       ],
@@ -382,7 +382,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.happymh-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.happymh-v1.aix",
+      "downloadURL": "sources/zh.happymh-v1.aix",
       "languages": [
         "zh"
       ],
@@ -397,7 +397,7 @@
       "altNames": [],
       "version": 4,
       "iconURL": "icons/zh.picacomic-v4.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.picacomic-v4.aix",
+      "downloadURL": "sources/zh.picacomic-v4.aix",
       "languages": [
         "zh"
       ],
@@ -412,7 +412,7 @@
       "altNames": [],
       "version": 5,
       "iconURL": "icons/zh.bilimanga-v5.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.bilimanga-v5.aix",
+      "downloadURL": "sources/zh.bilimanga-v5.aix",
       "languages": [
         "zh"
       ],
@@ -427,7 +427,7 @@
       "altNames": [],
       "version": 2,
       "iconURL": "icons/zh.bakamh-v2.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.bakamh-v2.aix",
+      "downloadURL": "sources/zh.bakamh-v2.aix",
       "languages": [
         "zh"
       ],
@@ -444,7 +444,7 @@
       ],
       "version": 24,
       "iconURL": "icons/zh.copymanga-v24.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.copymanga-v24.aix",
+      "downloadURL": "sources/zh.copymanga-v24.aix",
       "languages": [
         "zh"
       ],
@@ -459,7 +459,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.mkzhan-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.mkzhan-v1.aix",
+      "downloadURL": "sources/zh.mkzhan-v1.aix",
       "languages": [
         "zh"
       ],
@@ -474,7 +474,7 @@
       "altNames": [],
       "version": 6,
       "iconURL": "icons/zh.msxhm-v6.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.msxhm-v6.aix",
+      "downloadURL": "sources/zh.msxhm-v6.aix",
       "languages": [
         "zh"
       ],
@@ -489,7 +489,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.manhuadb-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.manhuadb-v1.aix",
+      "downloadURL": "sources/zh.manhuadb-v1.aix",
       "languages": [
         "zh"
       ],
@@ -504,7 +504,7 @@
       "altNames": [],
       "version": 2,
       "iconURL": "icons/zh.manhuaren-v2.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.manhuaren-v2.aix",
+      "downloadURL": "sources/zh.manhuaren-v2.aix",
       "languages": [
         "zh"
       ],
@@ -521,7 +521,7 @@
       ],
       "version": 1,
       "iconURL": "icons/zh.manwamanhua-v1.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v1.aix",
+      "downloadURL": "sources/zh.manwamanhua-v1.aix",
       "languages": [
         "zh"
       ],
@@ -536,7 +536,7 @@
       "altNames": [],
       "version": 4,
       "iconURL": "icons/zh.relamanhua-v4.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.relamanhua-v4.aix",
+      "downloadURL": "sources/zh.relamanhua-v4.aix",
       "languages": [
         "zh"
       ],
@@ -551,7 +551,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.jmcomic-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.jmcomic-v3.aix",
+      "downloadURL": "sources/zh.jmcomic-v3.aix",
       "languages": [
         "zh"
       ],
@@ -566,7 +566,7 @@
       "altNames": [],
       "version": 6,
       "iconURL": "icons/zh.wnacg-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.wnacg-v6.aix",
+      "downloadURL": "sources/zh.wnacg-v6.aix",
       "languages": [
         "zh"
       ],
@@ -581,7 +581,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.yandanshe-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.yandanshe-v1.aix",
+      "downloadURL": "sources/zh.yandanshe-v1.aix",
       "languages": [
         "zh"
       ],
@@ -596,7 +596,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.wenku8-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.wenku8-v1.aix",
+      "downloadURL": "sources/zh.wenku8-v1.aix",
       "languages": [
         "zh"
       ],
@@ -611,7 +611,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.suduguu-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.suduguu-v1.aix",
+      "downloadURL": "sources/zh.suduguu-v1.aix",
       "languages": [
         "zh"
       ],
@@ -626,7 +626,7 @@
       "altNames": [],
       "version": 3,
       "iconURL": "icons/zh.se8-v3.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.se8-v3.aix",
+      "downloadURL": "sources/zh.se8-v3.aix",
       "languages": [
         "zh"
       ],
@@ -641,7 +641,7 @@
       "altNames": [],
       "version": 13,
       "iconURL": "icons/zh.boylove-v13.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/zh.boylove-v13.aix",
+      "downloadURL": "sources/zh.boylove-v13.aix",
       "languages": [
         "zh"
       ],
@@ -656,7 +656,7 @@
       "altNames": [],
       "version": 1,
       "iconURL": "icons/zh.nnhanman-v1.png",
-      "downloadURL": "https://raw.githubusercontent.com/AlanLang/aidoku-sources/gh-pages/sources/zh.nnhanman-v1.aix",
+      "downloadURL": "sources/zh.nnhanman-v1.aix",
       "languages": [
         "zh"
       ],

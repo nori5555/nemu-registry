@@ -1,0 +1,23 @@
+Bakamh (巴卡漫画) Aidoku source, forked into nori5555/nemu-registry
+
+Original work: suiyuran/aidoku-zh-sources, src/rust/zh.bakamh/.
+Original project: https://github.com/suiyuran/aidoku-zh-sources
+Upstream state at fork (2026-11-12): upstream registry index lists zh.bakamh
+at v2, same as this registry; upstream source is a single lib.rs (303 lines)
+plus Cargo.toml, Cargo.lock and res/{source,filters,Icon}.json/png. The upstream
+repository carries no LICENSE file (checked 2026-11-12: no LICENSE at the repo
+root).
+This fork is distributed under the Apache License 2.0 (included verbatim in
+LICENSE), matching the registry's other Rust sources; if upstream later
+declares a license, update this notice to match.
+
+Modifications (2026-11-12, fork v3):
+- src/lib.rs: new listing_url() helper - WordPress 301-redirects /page/1/
+  to the canonical URL and the 301 body is empty, so a page-1 request
+  parsed to zero items and the homepage looked empty. Page 1 now requests
+  the canonical URL directly ({WWW_URL}/, /newmanga/, /on-going/, /end/,
+  /?s=...&post_type=wp-manga); page 2+ keeps the upstream /page/N/ shape.
+  Canonical URLs verified live 2026-11-12: / (42 items), /newmanga/,
+  /on-going/, /end/ (24 items), /?s=... (6 results).
+- res/source.json: version 2 -> 3.
+No other upstream file was changed.

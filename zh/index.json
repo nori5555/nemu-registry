@@ -215,29 +215,14 @@
       "id": "zh.zaimanhua",
       "name": "再漫画",
       "altNames": [],
-      "version": 7,
-      "iconURL": "icons/zh.zaimanhua-v7.png",
-      "downloadURL": "sources/zh.zaimanhua-v7.aix",
+      "version": 8,
+      "iconURL": "icons/zh.zaimanhua-v8.png",
+      "downloadURL": "sources/zh.zaimanhua-v8.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 1,
       "baseURL": "https://www.zaimanhua.com",
-      "minAppVersion": "0.7.1",
-      "maxAppVersion": null
-    },
-    {
-      "id": "zh.zaimanhuanovel",
-      "name": "再漫画轻小说",
-      "altNames": [],
-      "version": 1,
-      "iconURL": "icons/zh.zaimanhuanovel-v1.png",
-      "downloadURL": "sources/zh.zaimanhuanovel-v1.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 1,
-      "baseURL": "https://m.zaimanhua.com/pages/qing/qing",
       "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
@@ -290,15 +275,15 @@
       "id": "zh.baozimh2",
       "name": "包子漫画2",
       "altNames": [],
-      "version": 6,
-      "iconURL": "icons/zh.baozimh2-v6.png",
-      "downloadURL": "sources/zh.baozimh2-v6.aix",
+      "version": 7,
+      "iconURL": "icons/zh.baozimh2-v7.png",
+      "downloadURL": "sources/zh.baozimh2-v7.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 0,
-      "baseURL": null,
-      "minAppVersion": null,
+      "baseURL": "https://baozimh.org",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -349,31 +334,18 @@
     {
       "id": "zh.bilicomic",
       "name": "哔哩漫画",
-      "altNames": [],
-      "version": 4,
-      "iconURL": "icons/zh.bilicomic-v4.png",
-      "downloadURL": "sources/zh.bilicomic-v4.aix",
+      "altNames": [
+        "Bilicomic"
+      ],
+      "version": 5,
+      "iconURL": "icons/zh.bilicomic-v5.png",
+      "downloadURL": "sources/zh.bilicomic-v5.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 0,
-      "baseURL": null,
-      "minAppVersion": null,
-      "maxAppVersion": null
-    },
-    {
-      "id": "zh.bilinovel",
-      "name": "哔哩轻小说",
-      "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.bilinovel-v2.png",
-      "downloadURL": "sources/zh.bilinovel-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 1,
-      "baseURL": "https://www.bilinovel.com",
-      "minAppVersion": "0.8.3",
+      "baseURL": "https://www.bilimanga.net",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -591,21 +563,6 @@
       "maxAppVersion": null
     },
     {
-      "id": "zh.wenku8",
-      "name": "轻小说文库",
-      "altNames": [],
-      "version": 1,
-      "iconURL": "icons/zh.wenku8-v1.png",
-      "downloadURL": "sources/zh.wenku8-v1.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 1,
-      "baseURL": "https://www.wenku8.net",
-      "minAppVersion": "0.8.5",
-      "maxAppVersion": null
-    },
-    {
       "id": "zh.suduguu",
       "name": "速读谷",
       "altNames": [],
@@ -654,14 +611,14 @@
       "id": "zh.nnhanman",
       "name": "鸟鸟韩漫",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/zh.nnhanman-v1.png",
-      "downloadURL": "sources/zh.nnhanman-v1.aix",
+      "version": 2,
+      "iconURL": "icons/zh.nnhanman-v2.png",
+      "downloadURL": "sources/zh.nnhanman-v2.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 2,
-      "baseURL": null,
+      "baseURL": "https://nnhm7.com",
       "minAppVersion": null,
       "maxAppVersion": null
     }

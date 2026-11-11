@@ -1,0 +1,19 @@
+Nnhanman (鸟鸟韩漫) Aidoku source, forked into nori5555/nemu-registry
+
+Original work: AlanLang/aidoku-sources, src/rust/zh.nnhanman/.
+Copyright (c) 2024 Alan.
+License: MIT License (included verbatim in LICENSE).
+Original project: https://github.com/AlanLang/aidoku-sources
+Upstream state at fork (2026-11-11): last change 2025-03-29 (104949a6);
+upstream is still at v1.
+
+Modifications (2026-11-11, fork v2):
+- src/lib.rs: get_page_list selector changed from "img.lazy" to
+  "div.view-imgBox img[data-src]" and the image attribute from
+  "data-original" to "data-src" (the site's chapter pages changed their
+  lazy-load markup; the old markers no longer exist on the page).
+- src/url.rs: domain prefix changed from https://nnhanman9.com to
+  https://nnhm7.com (the site moved; the old domain only 301-redirects).
+  The Referer header derives from the same prefix, so it moves with it.
+- res/source.json: version 1 -> 2, url updated to https://nnhm7.com/.
+No other upstream file was changed.

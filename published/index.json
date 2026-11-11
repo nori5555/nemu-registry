@@ -90,6 +90,20 @@
       "contentRating": 0,
       "baseURL": "https://m.dumanwu1.com",
       "minAppVersion": "0.7.1"
+    },
+    {
+      "id": "zh.bakamh",
+      "name": "巴卡漫画",
+      "altNames": [],
+      "version": 3,
+      "iconURL": "icons/zh.bakamh-v3.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bakamh-v3.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://bakamh.com",
+      "minAppVersion": "0.7.1"
     }
   ]
 }

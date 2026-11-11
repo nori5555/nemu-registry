@@ -31,6 +31,21 @@ DEFAULT_MIHON = "https://raw.githubusercontent.com/keiyoushi/extensions/repo/ind
 DEFAULT_AIDOKU = "https://aidoku-community.github.io/sources/index.min.json"
 FORMAT_CATALOG = "mihon2aidoku-catalog/1"
 
+# Novel sources removed from this registry by owner decision (2026-11-12).
+# The scheduled sync rebuilds the index from upstream inputs, so the exclusion
+# lives here: any id in this set never reaches the merged list, the zh
+# directory, the icon bundle, or the mirrored packages.
+EXCLUDED_SOURCE_IDS = {
+    "en.freewebnovel",
+    "en.hennoveltranslations",
+    "en.lightnovelpub",
+    "en.novelarchive",
+    "en.novelbuddy",
+    "zh.bilinovel",
+    "zh.wenku8",
+    "zh.zaimanhuanovel",
+}
+
 
 # --------------------------------------------------------------------------- io
 def fetch(url: str, cache_dir: Optional[str] = None, refresh: bool = False,
@@ -847,6 +862,10 @@ def cmd_convert(args: argparse.Namespace) -> int:
             if current is None or entry["version"] > current["version"]:
                 best[entry["id"]] = entry
         aidoku_entries = list(best.values())
+
+        # Owner-excluded sources (e.g. novels) never enter the merged list,
+        # so the scheduled sync cannot re-add them.
+        aidoku_entries = [e for e in aidoku_entries if e["id"] not in EXCLUDED_SOURCE_IDS]
 
     mapping, by_source = match_sources(extensions, aidoku_entries, min_score=args.min_score)
     catalog = build_catalog(repo, args.input, extensions, by_source)

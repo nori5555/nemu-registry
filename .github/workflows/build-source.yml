@@ -134,7 +134,9 @@ jobs:
       - name: Install nightly toolchain for zh.nnhanman
         run: rustup toolchain install nightly --target wasm32-unknown-unknown
 
-      - name: Build zh.nnhanman
+- name: Build zh.nnhanman
+        env:
+          RUSTFLAGS: "-C link-arg=--allow-undefined"
         run: |
           cargo +nightly build --release \
             --manifest-path sources/zh.nnhanman/Cargo.toml \
@@ -188,6 +190,8 @@ jobs:
       # cargo +nightly (suiyuran/aidoku-zh-sources build.sh), and the
       # nightly toolchain was already installed above for zh.nnhanman.
       - name: Build zh.bilicomic
+        env:
+          RUSTFLAGS: "-C link-arg=--allow-undefined"
         run: |
           cargo +nightly build --release \
             --manifest-path sources/zh.bilicomic/Cargo.toml \
@@ -239,6 +243,8 @@ jobs:
       # zh.baozimh2 is an aidoku 0.2.0 source; upstream builds it with
       # cargo +nightly (suiyuran/aidoku-zh-sources build.sh).
       - name: Build zh.baozimh2
+        env:
+          RUSTFLAGS: "-C link-arg=--allow-undefined"
         run: |
           cargo +nightly build --release \
             --manifest-path sources/zh.baozimh2/Cargo.toml \

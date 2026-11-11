@@ -1,0 +1,47 @@
+Baozimh2 (包子漫画2) Aidoku source, forked into nori5555/nemu-registry
+
+Original work: suiyuran/aidoku-zh-sources, src/rust/zh.baozimh2/.
+Original project: https://github.com/suiyuran/aidoku-zh-sources
+Upstream state at fork (2026-11-11): upstream registry index lists zh.baozimh2
+at v6, same as this registry; upstream source is a single lib.rs (335 lines)
+plus Cargo.toml, Cargo.lock and res/{source,filters}.json. The upstream
+repository carries no LICENSE file (checked 2026-11-11: LICENSE at the repo
+root and at src/rust/zh.baozimh2/LICENSE both 404; README names no license).
+This fork is distributed under the Apache License 2.0 (included verbatim in
+LICENSE), matching the registry's other Rust sources; if upstream later
+declares a license, update this notice to match.
+Original icon, retained unmodified (renamed Icon.png -> icon.png):
+  public/sources/zh.baozimh2-v6.aix, Payload/Icon.png
+  (sha256 55adb0bf48dcea2a539ebbbd34b388b222e3ed65ff3489a2a1748896b511f431)
+
+Modifications (2026-11-11, fork v7):
+- src/lib.rs: API_URL api-get-v2.mgsearcher.com -> api-get-v3.mgsearcher.com
+  (the v2 host 301s chapter calls to v3 and 302s the new chapter path to a
+  dead host).
+- src/lib.rs: get_page_list now calls /api/v2/chapter/getinfo (the old
+  /api/chapter/getinfo returns 410 "Legacy chapter API is disabled") and
+  decodes the obfuscated images string; the image host follows the
+  reader's line mapping (line 2 -> c-nd2-1.6wm.top, otherwise
+  c-nd3-1.6wm.top). The old f40-1-4.g-mh.online host is gone.
+- src/decode.rs (new): re-implementation of the reader's chapter image
+  decoder (marker split, segment re-order, odd 7-char chunk reversal,
+  custom-alphabet to base64url substitution, base64url decode to JSON).
+  No site JavaScript is included in this source and no key material is
+  involved; see NOTES for the full reverse-engineering evidence.
+- src/lib.rs: get_manga_details description now comes from the chapter
+  API's data.desc, falling back to <meta name="description"> with the
+  leading first-chapter-title prefix stripped; the old
+  .text-medium.my-unit-md selector no longer exists on the site. Title
+  suffix cleanup now also strips "-包子漫畫" (the "-🌈️包子漫畫" suffix
+  is gone from page titles).
+- res/source.json: version 6 -> 7.
+- Cargo.toml: package renamed aidoku-baozimh2 -> baozimh2 so the built
+  wasm is baozimh2.wasm (same convention as the registry's other
+  sources); aidoku pinned to the 0.2.0 rev the v6 .aix was built against
+  (bae338b1), because current aidoku-rs main (0.3.0) removed the
+  #[get_manga_list] macro API this source uses; base64 0.22 added for
+  the chapter image decoder.
+- res/settings.json: new empty array. Upstream ships no settings file;
+  the empty file exists only so package.py validates the same res/ set
+  as the registry's other sources. It exposes no settings.
+No other upstream file was changed.

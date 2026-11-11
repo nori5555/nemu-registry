@@ -13,7 +13,7 @@ panic = "abort"
 panic = "abort"
 opt-level = "s"
 strip = true
-lto = true
+lto = false
 
 [dependencies]
 # Pinned to the exact aidoku 0.2.0 rev the upstream v6 .aix was built

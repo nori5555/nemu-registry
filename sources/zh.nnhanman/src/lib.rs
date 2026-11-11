@@ -7,7 +7,7 @@ use aidoku::{
   error::Result,
   prelude::*,
   std::{net::Request, String, Vec},
-  Chapter, Filter, Listing, Manga, MangaPageResult, MangaStatus, Page,
+  Chapter, Filter, Listing, Manga, MangaPageResult, MangaStatus, MangaViewer, Page,
 };
 use alloc::string::ToString;
 use parser::parser_mange_list;
@@ -34,6 +34,7 @@ fn get_manga_list(filters: Vec<Filter>, page: i32) -> Result<MangaPageResult> {
           cover: cover,
           title: title,
           url: url.to_string(),
+			viewer: MangaViewer::Vertical,
           ..Default::default()
         }
       })
@@ -113,6 +114,7 @@ fn get_manga_details(manga_id: String) -> Result<Manga> {
     description: description,
     status: status,
     categories: categories,
+	  viewer: MangaViewer::Vertical,
     ..Default::default()
   })
 }

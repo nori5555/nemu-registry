@@ -62,6 +62,20 @@
       "contentRating": 0,
       "baseURL": "https://www.bilimanga.net",
       "minAppVersion": "0.7.1"
+    },
+    {
+      "id": "zh.baozimh2",
+      "name": "包子漫画2",
+      "altNames": [],
+      "version": 7,
+      "iconURL": "icons/zh.baozimh2-v7.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.baozimh2-v7.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://baozimh.org",
+      "minAppVersion": "0.7.1"
     }
   ]
 }

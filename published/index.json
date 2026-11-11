@@ -76,6 +76,20 @@
       "contentRating": 0,
       "baseURL": "https://baozimh.org",
       "minAppVersion": "0.7.1"
+    },
+    {
+      "id": "zh.dumanwu",
+      "name": "读漫屋",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/zh.dumanwu-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.dumanwu-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://m.dumanwu1.com",
+      "minAppVersion": "0.7.1"
     }
   ]
 }

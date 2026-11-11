@@ -9,6 +9,9 @@ on:
       - "sources/zh.nnhanman/**"
       - "sources/zh.bilicomic/**"
       - "sources/zh.baozimh2/**"
+      - "sources/zh.dumanwu/**"
+      - "sources/zh.rumanhua/**"
+      
   workflow_dispatch:
 
 permissions:

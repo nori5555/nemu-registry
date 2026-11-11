@@ -7,6 +7,10 @@
 // ImageCDNInterceptor. (v2-v4 inlined data: URLs instead; the app's image
 // loader does not render those, so pages stayed broken even though the
 // decryption itself worked.)
+// v6 adds the Mihon extension's settings: site line, image line, AES key
+// (see res/settings.json). The cover still cannot be fixed from the source:
+// nemu's cover pipeline validates the image container before
+// process_cover_image runs, so encrypted bytes never reach the processor.
 #![no_std]
 
 mod crypto;
@@ -137,6 +141,13 @@ struct ComicFilter {
 
 // -------------------------------------------------------------------- helpers
 fn base_url() -> String {
+    // The 網站線路 select wins when the user picked one; otherwise the
+    // custom baseURL text below applies (its default is manwadz.cc).
+    let line = defaults_get::<String>("siteLine").unwrap_or_default();
+    let trimmed = line.trim().trim_end_matches('/');
+    if !trimmed.is_empty() && (trimmed.starts_with("https://") || trimmed.starts_with("http://")) {
+        return trimmed.into();
+    }
     let raw = defaults_get::<String>("baseURL").unwrap_or_default();
     let trimmed = raw.trim().trim_end_matches('/');
     if trimmed.is_empty() || !(trimmed.starts_with("https://") || trimmed.starts_with("http://")) {
@@ -144,6 +155,49 @@ fn base_url() -> String {
     } else {
         trimmed.into()
     }
+}
+
+const IMAGE_HOSTS: [&str; 5] = ["tu.mhttu.cc", "tu.mwzu.cc", "fm.mwtt.cc", "ce.mwzu.cc", "ce.mhttu.cc"];
+
+/// Preferred image host from the 圖片線路 setting; the first host when the
+/// setting is unset or holds an unknown value.
+fn image_line() -> String {
+    let raw = defaults_get::<String>("imageLine").unwrap_or_default();
+    let trimmed = raw.trim();
+    if IMAGE_HOSTS.contains(&trimmed) {
+        trimmed.into()
+    } else {
+        IMAGE_HOSTS[0].into()
+    }
+}
+
+fn url_host(url: &str) -> &str {
+    url.split_once("://").and_then(|(_, rest)| rest.split('/').next()).unwrap_or("")
+}
+
+fn with_host(url: &str, host: &str) -> String {
+    match url.split_once("://") {
+        Some((scheme, rest)) => match rest.split_once('/') {
+            Some((_, path)) => format!("{scheme}://{host}/{path}"),
+            None => format!("{scheme}://{host}"),
+        },
+        None => url.into(),
+    }
+}
+
+/// AES key from the 圖片解密 AES Key setting (exactly 32 characters);
+/// falls back to the compiled-in key when unset or malformed, so the
+/// source keeps working if the site rotates the key and the user has
+/// not pasted the new one yet.
+fn aes_key() -> [u8; 32] {
+    let raw = defaults_get::<String>("aesKey").unwrap_or_default();
+    let trimmed = raw.trim();
+    if trimmed.len() == 32 {
+        let mut key = [0u8; 32];
+        key.copy_from_slice(trimmed.as_bytes());
+        return key;
+    }
+    *crypto::KEY
 }
 
 fn get_json<T: for<'de> Deserialize<'de>>(url: &str, referer: &str) -> Result<T> {
@@ -380,7 +434,7 @@ impl BaseUrlProvider for ManwaManhua {
 /// bytes and no data: URL is involved.
 fn decrypt_image_response(response: &ImageResponse) -> Result<ImageRef> {
     let bytes = response.image.data();
-    let plain = crypto::decrypt(&bytes)?;
+    let plain = crypto::decrypt_with_key(&bytes, &aes_key())?;
     Ok(ImageRef::new(&plain))
 }
 
@@ -398,7 +452,14 @@ impl CoverImageProcessor for ManwaManhua {
 
 impl ImageRequestProvider for ManwaManhua {
     fn get_image_request(&self, url: String, _context: Option<PageContext>) -> Result<Request> {
-        Ok(Request::get(&url)?.header("Referer", &base_url()))
+        // Rewrite known manwa image hosts to the 圖片線路 the user picked;
+        // any other host is left alone.
+        let rewritten = if IMAGE_HOSTS.contains(&url_host(&url)) {
+            with_host(&url, &image_line())
+        } else {
+            url
+        };
+        Ok(Request::get(&rewritten)?.header("Referer", &base_url()))
     }
 }
 

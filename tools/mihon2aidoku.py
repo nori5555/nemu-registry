@@ -32,6 +32,7 @@ DEFAULT_AIDOKU = "https://aidoku-community.github.io/sources/index.min.json"
 FORMAT_CATALOG = "mihon2aidoku-catalog/1"
 
 # Novel sources removed from this registry by owner decision (2026-11-12).
+# zh.cartoonmad removed 2026-11-12: site is dead (domain expired and parked).
 # The scheduled sync rebuilds the index from upstream inputs, so the exclusion
 # lives here: any id in this set never reaches the merged list, the zh
 # directory, the icon bundle, or the mirrored packages.
@@ -42,6 +43,7 @@ EXCLUDED_SOURCE_IDS = {
     "en.novelarchive",
     "en.novelbuddy",
     "zh.bilinovel",
+    "zh.cartoonmad",
     "zh.wenku8",
     "zh.zaimanhuanovel",
 }

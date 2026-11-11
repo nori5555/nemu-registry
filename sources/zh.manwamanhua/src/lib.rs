@@ -284,7 +284,7 @@ impl Source for ManwaManhua {
             updated.title = detail.title;
             // Inline the cover: the host's image-processor path is unreliable on
             // mobile, and the bytes are AES-CBC encrypted at rest.
-            updated.cover = fetch_inline(&detail.cover, &referer).unwrap_or_else(|_| detail.cover.clone());
+            updated.cover = Some(fetch_inline(&detail.cover, &referer).unwrap_or_else(|_| detail.cover.clone()));
             updated.authors = (!detail.author.is_empty()).then(|| vec![detail.author]);
             updated.status = match detail.status {
                 1 => MangaStatus::Ongoing,
@@ -394,16 +394,16 @@ fn fetch_inline(url: &str, referer: &str) -> core::result::Result<String, String
         return Err("空地址".into());
     }
     let response = Request::get(url)
-        .map_err(|_| "创建请求失败".to_string())?
+        .map_err(|_| "创建请求失败".into())?
         .header("Referer", referer)
         .send()
-        .map_err(|_| "发送请求失败".to_string())?;
+        .map_err(|_| "发送请求失败".into())?;
     let code = response.status_code();
     if !(200..300).contains(&code) {
         return Err(format!("图床 HTTP {code}"));
     }
-    let bytes = response.get_data().map_err(|_| "读取图片数据失败".to_string())?;
-    crypto::data_url(&bytes).map_err(|_| "解密失败".to_string())
+    let bytes = response.get_data().map_err(|_| "读取图片数据失败".into())?;
+    crypto::data_url(&bytes).map_err(|_| "解密失败".into())
 }
 
 register_source!(ManwaManhua, ListingProvider, BaseUrlProvider);

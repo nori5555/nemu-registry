@@ -1,0 +1,15 @@
+如漫画 Aidoku/Rust port
+
+Auto-ported from Keiyoushi eu.kanade.tachiyomi.extension.zh.rumanhua (theme: mmlook) by tools/autoport.py.
+Original work: Keiyoushi extensions-source.
+Copyright remains with the original contributors.
+License: Apache License, Version 2.0 (included verbatim in LICENSE).
+Original project: https://github.com/keiyoushi/extensions-source
+Original icon, retained unmodified (when the scaffold could fetch it):
+  src/zh/rumanhua/res/mipmap-xxxhdpi/ic_launcher.png
+
+Aidoku API reference:
+  https://github.com/Aidoku/aidoku-rs
+  bae338b15a3840dc0428c7af64fe9fc92abfa2fb (aidoku 0.2.0)
+Aidoku SDK and the base64 crate are third-party dependencies licensed
+MIT OR Apache-2.0. They are not represented as newly authored by this port.

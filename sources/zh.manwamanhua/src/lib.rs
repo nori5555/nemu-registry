@@ -11,7 +11,11 @@
 // (see res/settings.json). The cover still cannot be fixed from the source:
 // nemu's cover pipeline validates the image container before
 // process_cover_image runs, so encrypted bytes never reach the processor.
-// v7 declares MangaViewer::Vertical so nemu's Automatic reading mode opens Korean webtoons in scrolling (long-strip) mode.
+// v7 declares Viewer::Vertical so nemu's Automatic reading mode opens Korean webtoons in scrolling (long-strip) mode.
+// v8 retries JSON fetches up to 3 times: the chapters endpoint drops large
+// responses mid-transfer, so a single fetch often ends in truncated JSON
+// ("漫蛙漫画接口返回的不是预期 JSON") and the title shows no chapters.
+// The icon is the site's original logo.png (frog, full-bleed), not a redraw.
 #![no_std]
 
 mod crypto;
@@ -202,6 +206,23 @@ fn aes_key() -> [u8; 32] {
 }
 
 fn get_json<T: for<'de> Deserialize<'de>>(url: &str, referer: &str) -> Result<T> {
+    // v8: the chapters endpoint drops large responses mid-transfer, so a
+    // single fetch often ends in truncated JSON ("不是预期 JSON"). Retry.
+    let mut attempt = 0;
+    loop {
+        match get_json_once(url, referer) {
+            Ok(value) => return Ok(value),
+            Err(err) => {
+                attempt += 1;
+                if attempt >= 3 {
+                    return Err(err);
+                }
+            }
+        }
+    }
+}
+
+fn get_json_once<T: for<'de> Deserialize<'de>>(url: &str, referer: &str) -> Result<T> {
     let response = Request::get(url)?
         .header("Referer", referer)
         .header("Accept", "application/json")
@@ -215,6 +236,21 @@ fn get_json<T: for<'de> Deserialize<'de>>(url: &str, referer: &str) -> Result<T>
 }
 
 fn post_json<T: for<'de> Deserialize<'de>>(url: &str, body: &str, referer: &str) -> Result<T> {
+    let mut attempt = 0;
+    loop {
+        match post_json_once(url, body, referer) {
+            Ok(value) => return Ok(value),
+            Err(err) => {
+                attempt += 1;
+                if attempt >= 3 {
+                    return Err(err);
+                }
+            }
+        }
+    }
+}
+
+fn post_json_once<T: for<'de> Deserialize<'de>>(url: &str, body: &str, referer: &str) -> Result<T> {
     let response = Request::post(url)?
         .header("Referer", referer)
         .header("Content-Type", "application/json")

@@ -349,56 +349,56 @@ jobs:
           git push
 
 
-    # zh.bakamh is an aidoku 0.2.0 source; upstream builds it with
-    # cargo +nightly (suiyuran/aidoku-zh-sources build.sh), and the
-    # nightly toolchain is already installed above (zh.nnhanman step).
-        - name: Build zh.bakamh
-          env:
-            RUSTFLAGS: "-C link-arg=--allow-undefined"
-          run: |
-            cargo +nightly build --release \
-              --manifest-path sources/zh.bakamh/Cargo.toml \
-              --target wasm32-unknown-unknown
-            python3 sources/zh.bakamh/package.py \
-              --wasm sources/zh.bakamh/target/wasm32-unknown-unknown/release/bakamh.wasm \
-              --out sources/zh.bakamh-v3.aix
+  # zh.bakamh is an aidoku 0.2.0 source; upstream builds it with
+  # cargo +nightly (suiyuran/aidoku-zh-sources build.sh), and the
+  # nightly toolchain is already installed above (zh.nnhanman step).
+      - name: Build zh.bakamh
+        env:
+          RUSTFLAGS: "-C link-arg=--allow-undefined"
+        run: |
+          cargo +nightly build --release \
+            --manifest-path sources/zh.bakamh/Cargo.toml \
+            --target wasm32-unknown-unknown
+          python3 sources/zh.bakamh/package.py \
+            --wasm sources/zh.bakamh/target/wasm32-unknown-unknown/release/bakamh.wasm \
+            --out sources/zh.bakamh-v3.aix
 
-        - name: Publish zh.bakamh package and registry entry
-          run: |
-            mkdir -p published/icons
-            cp sources/zh.bakamh-v3.aix published/
-            cp sources/zh.bakamh/res/Icon.png published/icons/zh.bakamh-v3.png
-            python3 - <<'PY'
-            import json, pathlib
-            path = pathlib.Path("published/index.json")
-            data = json.loads(path.read_text(encoding="utf-8"))
-            entry = {
-                "id": "zh.bakamh",
-                "name": "巴卡漫画",
-                "altNames": [],
-                "version": 3,
-                "iconURL": "icons/zh.bakamh-v3.png",
-                "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bakamh-v3.aix",
-                "languages": ["zh"],
-                "contentRating": 2,
-                "baseURL": "https://bakamh.com",
-                "minAppVersion": "0.7.1",
-            }
-            sources = [s for s in data["sources"] if s["id"] != "zh.bakamh"] + [entry]
-            data["sources"] = sources
-            path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-            pathlib.Path("published/index.min.json").write_text(
-                json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-            PY
+      - name: Publish zh.bakamh package and registry entry
+        run: |
+          mkdir -p published/icons
+          cp sources/zh.bakamh-v3.aix published/
+          cp sources/zh.bakamh/res/Icon.png published/icons/zh.bakamh-v3.png
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("published/index.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          entry = {
+              "id": "zh.bakamh",
+              "name": "巴卡漫画",
+              "altNames": [],
+              "version": 3,
+              "iconURL": "icons/zh.bakamh-v3.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bakamh-v3.aix",
+              "languages": ["zh"],
+              "contentRating": 2,
+              "baseURL": "https://bakamh.com",
+              "minAppVersion": "0.7.1",
+          }
+          sources = [s for s in data["sources"] if s["id"] != "zh.bakamh"] + [entry]
+          data["sources"] = sources
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          pathlib.Path("published/index.min.json").write_text(
+              json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+          PY
 
-        - name: Commit zh.bakamh artifacts
-          run: |
-            git add sources/zh.bakamh-v3.aix published/
-            if git diff --cached --quiet; then
-              echo "No changes."
-              exit 0
-            fi
-            git -c user.name="github-actions[bot]" \
-                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                commit -m "Build zh.bakamh ($(date -u +%Y-%m-%d))"
-            git push
+      - name: Commit zh.bakamh artifacts
+        run: |
+          git add sources/zh.bakamh-v3.aix published/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Build zh.bakamh ($(date -u +%Y-%m-%d))"
+          git push

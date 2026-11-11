@@ -31,13 +31,13 @@ jobs:
             --target wasm32-unknown-unknown
           python3 sources/zh.manwamanhua/package.py \
             --wasm sources/zh.manwamanhua/target/wasm32-unknown-unknown/release/manwamanhua.wasm \
-            --out sources/zh.manwamanhua-v4.aix
+            --out sources/zh.manwamanhua-v5.aix
 
       - name: Publish package and registry entry
         run: |
           mkdir -p published/icons
-          cp sources/zh.manwamanhua-v4.aix published/
-          cp sources/zh.manwamanhua/res/icon.png published/icons/zh.manwamanhua-v4.png
+          cp sources/zh.manwamanhua-v5.aix published/
+          cp sources/zh.manwamanhua/res/icon.png published/icons/zh.manwamanhua-v5.png
           python3 - <<'PY'
           import json, pathlib
           path = pathlib.Path("published/index.json")
@@ -46,9 +46,9 @@ jobs:
               "id": "zh.manwamanhua",
               "name": "漫蛙漫画",
               "altNames": ["Manwa Manhua"],
-              "version": 4,
-              "iconURL": "icons/zh.manwamanhua-v4.png",
-              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v4.aix",
+              "version": 5,
+              "iconURL": "icons/zh.manwamanhua-v5.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v5.aix",
               "languages": ["zh"],
               "contentRating": 2,
               "baseURL": "https://manwadz.cc",
@@ -63,7 +63,7 @@ jobs:
 
       - name: Commit artifacts
         run: |
-          git add sources/zh.manwamanhua-v4.aix published/
+          git add sources/zh.manwamanhua-v5.aix published/
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0

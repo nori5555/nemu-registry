@@ -2,21 +2,6 @@
   "name": "nori 自建移植源",
   "sources": [
     {
-      "id": "zh.nnhanman",
-      "name": "鸟鸟韩漫",
-      "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.nnhanman-v2.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.nnhanman-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 2,
-      "baseURL": "https://nnhm7.com",
-      "minAppVersion": null,
-      "maxAppVersion": null
-    },
-    {
       "id": "zh.bilicomic",
       "name": "哔哩漫画",
       "altNames": [
@@ -75,6 +60,21 @@
       "contentRating": 1,
       "baseURL": "https://www.zaimanhua.com",
       "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "zh.nnhanman",
+      "name": "鸟鸟韩漫",
+      "altNames": [],
+      "version": 3,
+      "iconURL": "icons/zh.nnhanman-v3.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.nnhanman-v3.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://nnhm7.com",
+      "minAppVersion": null,
       "maxAppVersion": null
     }
   ]

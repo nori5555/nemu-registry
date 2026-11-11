@@ -50,15 +50,15 @@
       "id": "en.armageddon",
       "name": "Armageddon",
       "altNames": [],
-      "version": 5,
-      "iconURL": "icons/en.armageddon-v5.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.armageddon-v5.aix",
+      "version": 6,
+      "iconURL": "icons/en.armageddon-v6.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.armageddon-v6.aix",
       "languages": [
         "en"
       ],
       "contentRating": 2,
       "baseURL": "https://www.silentquill.net",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -95,15 +95,15 @@
       "id": "en.athreascans",
       "name": "Athrea Scans",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.athreascans-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.athreascans-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.athreascans-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.athreascans-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 2,
       "baseURL": "https://athreascans.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -227,6 +227,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.evascans",
+      "name": "Eva Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.evascans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.evascans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://evascans.net",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.ezmanga",
       "name": "EzManga",
       "altNames": [],
@@ -335,30 +350,30 @@
       "id": "en.kingofshojo",
       "name": "KingOfShojo",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.kingofshojo-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.kingofshojo-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.kingofshojo-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.kingofshojo-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 1,
       "baseURL": "https://kingofshojo.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "en.lagoonscans",
       "name": "Lagoon Scans",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.lagoonscans-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.lagoonscans-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.lagoonscans-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.lagoonscans-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://lagoonscans.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -374,6 +389,21 @@
       "contentRating": 1,
       "baseURL": null,
       "minAppVersion": null,
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.madarascans",
+      "name": "Madara Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.madarascans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.madarascans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://madarascans.net",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -605,15 +635,15 @@
       "id": "en.mangatx",
       "name": "MangaTx",
       "altNames": [],
-      "version": 10,
-      "iconURL": "icons/en.mangatx-v10.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mangatx-v10.aix",
+      "version": 11,
+      "iconURL": "icons/en.mangatx-v11.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mangatx-v11.aix",
       "languages": [
         "en"
       ],
       "contentRating": 2,
       "baseURL": "https://mangatx.cc",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -665,15 +695,15 @@
       "id": "en.manhwax",
       "name": "Manhwax",
       "altNames": [],
-      "version": 5,
-      "iconURL": "icons/en.manhwax-v5.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.manhwax-v5.aix",
+      "version": 6,
+      "iconURL": "icons/en.manhwax-v6.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.manhwax-v6.aix",
       "languages": [
         "en"
       ],
       "contentRating": 2,
       "baseURL": "https://manhwax.top",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -724,18 +754,33 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.ragescans",
+      "name": "Rage Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.ragescans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.ragescans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://ragescans.com",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.ravenscans",
       "name": "Raven Scans",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.ravenscans-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.ravenscans-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.ravenscans-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.ravenscans-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 2,
       "baseURL": "https://ravenscans.org",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -757,30 +802,30 @@
       "id": "en.rizzfables",
       "name": "Rizz Fables",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/en.rizzfables-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.rizzfables-v2.aix",
+      "version": 3,
+      "iconURL": "icons/en.rizzfables-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.rizzfables-v3.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://rizzfables.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "en.rokaricomics",
       "name": "RokariComics",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.rokaricomics-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.rokaricomics-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.rokaricomics-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.rokaricomics-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 1,
       "baseURL": "https://rokaricomics.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -811,6 +856,21 @@
       "contentRating": 0,
       "baseURL": "https://tcbonepiecechapters.com",
       "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.thunderscans",
+      "name": "Thunder Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.thunderscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.thunderscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://en-thunderscans.com",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -856,6 +916,21 @@
       "contentRating": 2,
       "baseURL": "https://toontop.io",
       "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.violetscans",
+      "name": "Violet Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.violetscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.violetscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://violetmanga.com",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -1192,105 +1267,105 @@
       "id": "fr.sushiscan",
       "name": "Sushiscan",
       "altNames": [],
-      "version": 8,
-      "iconURL": "icons/fr.sushiscan-v8.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/fr.sushiscan-v8.aix",
+      "version": 9,
+      "iconURL": "icons/fr.sushiscan-v9.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/fr.sushiscan-v9.aix",
       "languages": [
         "en"
       ],
       "contentRating": 1,
       "baseURL": "https://sushiscan.net",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.kanzenin",
       "name": "Kanzenin",
       "altNames": [],
-      "version": 6,
-      "iconURL": "icons/id.kanzenin-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.kanzenin-v6.aix",
+      "version": 7,
+      "iconURL": "icons/id.kanzenin-v7.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.kanzenin-v7.aix",
       "languages": [
         "id"
       ],
       "contentRating": 2,
       "baseURL": "https://kanzenin.info",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.komiksin",
       "name": "Komiksin",
       "altNames": [],
-      "version": 6,
-      "iconURL": "icons/id.komiksin-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komiksin-v6.aix",
+      "version": 7,
+      "iconURL": "icons/id.komiksin-v7.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komiksin-v7.aix",
       "languages": [
         "id"
       ],
       "contentRating": 1,
       "baseURL": "https://komiksin.net",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.komiktap",
       "name": "Komiktap",
       "altNames": [],
-      "version": 7,
-      "iconURL": "icons/id.komiktap-v7.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komiktap-v7.aix",
+      "version": 8,
+      "iconURL": "icons/id.komiktap-v8.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komiktap-v8.aix",
       "languages": [
         "id"
       ],
       "contentRating": 2,
       "baseURL": "https://komiktap.info",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.komikucom",
       "name": "Komiku.com",
       "altNames": [],
-      "version": 5,
-      "iconURL": "icons/id.komikucom-v5.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komikucom-v5.aix",
+      "version": 6,
+      "iconURL": "icons/id.komikucom-v6.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.komikucom-v6.aix",
       "languages": [
         "id"
       ],
       "contentRating": 1,
       "baseURL": "https://01.komiku.asia",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.mangasusu",
       "name": "Mangasusu",
       "altNames": [],
-      "version": 6,
-      "iconURL": "icons/id.mangasusu-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.mangasusu-v6.aix",
+      "version": 7,
+      "iconURL": "icons/id.mangasusu-v7.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.mangasusu-v7.aix",
       "languages": [
         "id"
       ],
       "contentRating": 2,
       "baseURL": "https://mangasusuku.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "id.manhwalist",
       "name": "Manhwalist",
       "altNames": [],
-      "version": 6,
-      "iconURL": "icons/id.manhwalist-v6.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.manhwalist-v6.aix",
+      "version": 7,
+      "iconURL": "icons/id.manhwalist-v7.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/id.manhwalist-v7.aix",
       "languages": [
         "id"
       ],
       "contentRating": 0,
       "baseURL": "https://manhwalist02.site",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -2383,45 +2458,45 @@
       "id": "th.gomanga",
       "name": "Go-Manga",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/th.gomanga-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.gomanga-v1.aix",
+      "version": 2,
+      "iconURL": "icons/th.gomanga-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.gomanga-v2.aix",
       "languages": [
         "th"
       ],
       "contentRating": 1,
       "baseURL": "https://www.go-manga.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "th.prettyfrank",
       "name": "Pretty-Frank",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/th.prettyfrank-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.prettyfrank-v1.aix",
+      "version": 2,
+      "iconURL": "icons/th.prettyfrank-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.prettyfrank-v2.aix",
       "languages": [
         "th"
       ],
       "contentRating": 1,
       "baseURL": "https://www.pretty-frank.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
       "id": "th.upmanga",
       "name": "Up-Manga",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/th.upmanga-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.upmanga-v1.aix",
+      "version": 2,
+      "iconURL": "icons/th.upmanga-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/th.upmanga-v2.aix",
       "languages": [
         "th"
       ],
       "contentRating": 1,
       "baseURL": "https://www.up-manga.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -2815,21 +2890,6 @@
       "maxAppVersion": null
     },
     {
-      "id": "zh.cartoonmad",
-      "name": "动漫狂",
-      "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.cartoonmad-v2.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.cartoonmad-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 0,
-      "baseURL": null,
-      "minAppVersion": null,
-      "maxAppVersion": null
-    },
-    {
       "id": "zh.baozimh1",
       "name": "包子漫画1",
       "altNames": [],
@@ -3064,9 +3124,9 @@
       "altNames": [
         "Manwa Manhua"
       ],
-      "version": 6,
-      "iconURL": "icons/zh.manwamanhua-v6.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v6.aix",
+      "version": 7,
+      "iconURL": "icons/zh.manwamanhua-v7.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v7.aix",
       "languages": [
         "zh"
       ],
@@ -3184,9 +3244,9 @@
       "id": "zh.nnhanman",
       "name": "鸟鸟韩漫",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.nnhanman-v2.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.nnhanman-v2.aix",
+      "version": 3,
+      "iconURL": "icons/zh.nnhanman-v3.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.nnhanman-v3.aix",
       "languages": [
         "zh"
       ],

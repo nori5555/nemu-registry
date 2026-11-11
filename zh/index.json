@@ -242,21 +242,6 @@
       "maxAppVersion": null
     },
     {
-      "id": "zh.cartoonmad",
-      "name": "动漫狂",
-      "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.cartoonmad-v2.png",
-      "downloadURL": "sources/zh.cartoonmad-v2.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 0,
-      "baseURL": null,
-      "minAppVersion": null,
-      "maxAppVersion": null
-    },
-    {
       "id": "zh.baozimh1",
       "name": "包子漫画1",
       "altNames": [],
@@ -491,9 +476,9 @@
       "altNames": [
         "Manwa Manhua"
       ],
-      "version": 6,
-      "iconURL": "icons/zh.manwamanhua-v6.png",
-      "downloadURL": "sources/zh.manwamanhua-v6.aix",
+      "version": 7,
+      "iconURL": "icons/zh.manwamanhua-v7.png",
+      "downloadURL": "sources/zh.manwamanhua-v7.aix",
       "languages": [
         "zh"
       ],
@@ -611,9 +596,9 @@
       "id": "zh.nnhanman",
       "name": "鸟鸟韩漫",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.nnhanman-v2.png",
-      "downloadURL": "sources/zh.nnhanman-v2.aix",
+      "version": 3,
+      "iconURL": "icons/zh.nnhanman-v3.png",
+      "downloadURL": "sources/zh.nnhanman-v3.aix",
       "languages": [
         "zh"
       ],

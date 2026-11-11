@@ -11,13 +11,14 @@
 // (see res/settings.json). The cover still cannot be fixed from the source:
 // nemu's cover pipeline validates the image container before
 // process_cover_image runs, so encrypted bytes never reach the processor.
+// v7 declares MangaViewer::Vertical so nemu's Automatic reading mode opens Korean webtoons in scrolling (long-strip) mode.
 #![no_std]
 
 mod crypto;
 
 use aidoku::{
     BaseUrlProvider, Chapter, CoverImageProcessor, FilterValue, ImageRequestProvider,
-    ImageResponse, Listing, ListingProvider, Manga, MangaPageResult, MangaStatus, Page,
+    ImageResponse, Listing, ListingProvider, Manga, MangaPageResult, MangaStatus, MangaViewer, Page,
     PageContent, PageContext, PageImageProcessor, Result, Source,
     alloc::{String, Vec, format, vec},
     imports::{
@@ -317,6 +318,7 @@ fn to_manga(item: ComicItem) -> Option<Manga> {
         cover: (!item.cover.is_empty()).then_some(item.cover),
         authors: (!item.author.is_empty()).then(|| vec![item.author]),
         tags: Some(tags_to_genres(&item.tags)).filter(|t| !t.is_empty()),
+        viewer: MangaViewer::Vertical,
         ..Default::default()
     })
 }
@@ -338,6 +340,7 @@ impl Source for ManwaManhua {
     ) -> Result<Manga> {
         let base = base_url();
         let mut updated = manga.clone();
+        updated.viewer = MangaViewer::Vertical;
         if needs_details {
             let referer = format!("{base}/comic/{}", manga.key);
             let data: Response<ComicDetail> = get_json(&format!("{base}/api/comic/{}", manga.key), &referer)?;

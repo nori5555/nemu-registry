@@ -1,10 +1,1 @@
-[
-	{
-		"type": "group",
-		"title": "漫蛙漫画站点设置",
-		"items": [
-			{"type": "text", "key": "baseURL", "title": "自定义网址", "placeholder": "https://manwadz.cc", "default": "https://manwadz.cc", "keyboardType": 3, "autocapitalizationType": 0, "refreshes": ["content", "listings"] }
-		],
-		"footer": "默认 https://manwadz.cc。站点换域名时到 https://mwmw.cc/ 查最新地址后填这里。"
-	}
-]
+[{"footer":"默认 https://manwadz.cc。站点换域名时到 https://mwmw.cc/ 查最新地址后填这里。網站線路不选时用上面的自定义网址；圖片線路切换图片服务器；AES Key 留空用内置密钥，站点换密钥后可在这里填新密钥（32 字符）。","items":[{"autocapitalizationType":0,"default":"https://manwadz.cc","key":"baseURL","keyboardType":3,"placeholder":"https://manwadz.cc","refreshes":["content","listings"],"title":"自定义网址","type":"text"},{"key":"siteLine","refreshes":["content","listings"],"title":"網站線路","titles":["manwadz.cc","manwaan.cc","manwali.cc","manwana.cc","manwaqi.cc","manware.cc","manwari.cc","manwaye.cc"],"type":"select","values":["https://manwadz.cc","https://manwaan.cc","https://manwali.cc","https://manwana.cc","https://manwaqi.cc","https://manware.cc","https://manwari.cc","https://manwaye.cc"]},{"default":"tu.mhttu.cc","key":"imageLine","title":"圖片線路","titles":["tu.mhttu.cc","tu.mwzu.cc","fm.mwtt.cc","ce.mwzu.cc","ce.mhttu.cc"],"type":"select","values":["tu.mhttu.cc","tu.mwzu.cc","fm.mwtt.cc","ce.mwzu.cc","ce.mhttu.cc"]},{"autocapitalizationType":0,"default":"","key":"aesKey","placeholder":"留空使用内置密钥","title":"圖片解密 AES Key","type":"text"}],"title":"漫蛙漫画站点设置","type":"group"}]

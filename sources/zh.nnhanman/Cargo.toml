@@ -13,7 +13,7 @@ panic = "abort"
 panic = "abort"
 opt-level = "s"
 strip = true
-lto = true
+lto = false
 
 [dependencies]
 aidoku = { git = "https://github.com/Aidoku/aidoku-rs", features = ["helpers"] }

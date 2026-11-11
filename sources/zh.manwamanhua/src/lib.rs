@@ -18,7 +18,7 @@ mod crypto;
 
 use aidoku::{
     BaseUrlProvider, Chapter, CoverImageProcessor, FilterValue, ImageRequestProvider,
-    ImageResponse, Listing, ListingProvider, Manga, MangaPageResult, MangaStatus, MangaViewer, Page,
+    ImageResponse, Listing, ListingProvider, Manga, MangaPageResult, MangaStatus, Viewer, Page,
     PageContent, PageContext, PageImageProcessor, Result, Source,
     alloc::{String, Vec, format, vec},
     imports::{
@@ -318,7 +318,7 @@ fn to_manga(item: ComicItem) -> Option<Manga> {
         cover: (!item.cover.is_empty()).then_some(item.cover),
         authors: (!item.author.is_empty()).then(|| vec![item.author]),
         tags: Some(tags_to_genres(&item.tags)).filter(|t| !t.is_empty()),
-        viewer: MangaViewer::Vertical,
+        viewer: Viewer::Vertical,
         ..Default::default()
     })
 }
@@ -340,7 +340,7 @@ impl Source for ManwaManhua {
     ) -> Result<Manga> {
         let base = base_url();
         let mut updated = manga.clone();
-        updated.viewer = MangaViewer::Vertical;
+        updated.viewer = Viewer::Vertical;
         if needs_details {
             let referer = format!("{base}/comic/{}", manga.key);
             let data: Response<ComicDetail> = get_json(&format!("{base}/api/comic/{}", manga.key), &referer)?;

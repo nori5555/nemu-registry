@@ -1,0 +1,35 @@
+Bilicomic (嗶哩漫畫) Aidoku source, forked into nori5555/nemu-registry
+
+Original work: suiyuran/aidoku-zh-sources, src/rust/zh.bilicomic/.
+Original project: https://github.com/suiyuran/aidoku-zh-sources
+Upstream state at fork (2026-11-11): upstream registry index lists zh.bilicomic
+at v4, same as this registry; upstream source is a single lib.rs (480 lines)
+plus Cargo.toml and res/{source,filters}.json. The upstream repository carries
+no LICENSE file (checked 2026-11-11: LICENSE, LICENSE.md, LICENSE.txt and
+src/rust/zh.bilicomic/LICENSE all 404; README names no license). This fork is
+distributed under the Apache License 2.0 (included verbatim in LICENSE),
+matching the registry's other Rust sources; if upstream later declares a
+license, update this notice to match.
+Original icon, retained unmodified (renamed Icon.png -> icon.png):
+  public/sources/zh.bilicomic-v4.aix, Payload/Icon.png
+  (sha256 3c6290c4d7871c0f9e706d0380406f684add60eceefa480c7714ede525099d7f)
+
+Modifications (2026-11-11, fork v5):
+- src/lib.rs: get_manga_list browse URL changed from the site's retired
+  10-segment filter format to the current 12-segment format
+  ({order}_{tagid}_{isfull}_{anime}_{rgroupid}_{sortid}_{update}_{quality}_{page}_{typeid}_{pubtime}_{inmatch});
+  the template is the site's own themes/mobile/js/AsideFilter.js
+  generateFilterUrl, verified against live filter pages the same day.
+  typeid/pubtime/inmatch have no Aidoku filter in this source and stay "0".
+- src/lib.rs: FILTER_TAGID gains "66" (site added tag 青春, tagid 66).
+- res/filters.json: 作品主題 gains "青春" as the last option (tagid 66).
+- res/source.json: version 4 -> 5.
+- Cargo.toml: package renamed aidoku-bilicomic -> bilicomic so the built
+  wasm is bilicomic.wasm (same convention as the registry's other sources);
+  dependencies unchanged from upstream.
+- res/settings.json: new empty array. Upstream ships no settings file; the
+  empty file exists only so package.py validates the same res/ set as the
+  registry's other sources. It exposes no settings.
+No other upstream file was changed. Search is intentionally unchanged: the
+site's search endpoints return HTTP 200 with an empty body and no alternative
+search API exists (see NOTES).

@@ -12,7 +12,7 @@ use aidoku::{
 use base64::Engine;
 use base64::engine::general_purpose::STANDARD as B64;
 
-const KEY: &[u8; 32] = b"0B6666A0-BB59-1381-B746-a0E4C9AC";
+pub const KEY: &[u8; 32] = b"0B6666A0-BB59-1381-B746-a0E4C9AC";
 
 pub fn is_image(data: &[u8]) -> bool {
     data.starts_with(b"\xff\xd8\xff")
@@ -31,6 +31,12 @@ pub fn mime_of(data: &[u8]) -> &'static str {
 }
 
 pub fn decrypt(data: &[u8]) -> Result<Vec<u8>> {
+    decrypt_with_key(data, KEY)
+}
+
+/// Same as `decrypt`, but with an explicitly supplied key (fetched live from
+/// the site's frontend JS when available; falls back to `KEY`).
+pub fn decrypt_with_key(data: &[u8], key: &[u8; 32]) -> Result<Vec<u8>> {
     use aes::Aes256;
     use cbc::cipher::{BlockDecryptMut, KeyIvInit, block_padding::NoPadding};
 
@@ -42,7 +48,7 @@ pub fn decrypt(data: &[u8]) -> Result<Vec<u8>> {
     }
     let (iv, payload) = data.split_at(16);
     let mut buffer = payload.to_vec();
-    cbc::Decryptor::<Aes256>::new(KEY.into(), iv.into())
+    cbc::Decryptor::<Aes256>::new(key.into(), iv.into())
         .decrypt_padded_mut::<NoPadding>(&mut buffer)
         .map_err(|_| error!("漫蛙图片 AES-CBC 解密失败"))?;
     if !is_image(&buffer) {
@@ -53,6 +59,10 @@ pub fn decrypt(data: &[u8]) -> Result<Vec<u8>> {
 
 /// Decrypt (when needed) and inline as a data URL the client can render directly.
 pub fn data_url(data: &[u8]) -> Result<String> {
-    let bytes = decrypt(data)?;
+    data_url_with_key(data, KEY)
+}
+
+pub fn data_url_with_key(data: &[u8], key: &[u8; 32]) -> Result<String> {
+    let bytes = decrypt_with_key(data, key)?;
     Ok(format!("data:{};base64,{}", mime_of(&bytes), B64.encode(&bytes)))
 }

@@ -1,0 +1,21 @@
+Zaimanhua (再漫画) Aidoku source, forked into nori5555/nemu-registry
+
+Original work: aidoku-community/sources, sources/zh.zaimanhua/
+and the shared template templates/zaimanhua/.
+Copyright remains with the original aidoku-community contributors.
+License: Apache License, Version 2.0 (included verbatim in LICENSE).
+Original project: https://github.com/aidoku-community/sources
+Upstream state at fork (2026-11-11): no functional change to this source
+since 2026-05-28 (#544, aidoku-rs upgrade); upstream is still at v7.
+
+Modifications (2026-11-11, fork v8):
+- src/helpers.rs: new fetch_detail() / try_detail_by_pinyin() and a raw-response
+  variant with_access_response() of the existing with_access(). When the server
+  answers errno 2 ("漫画不存在或已被删除") to a guest detail-by-id request,
+  the detail is fetched by pinyin instead (search by title, resolve comic_py
+  from the search hit with the same id, then detail_by_pinyin). Genuinely
+  missing comics still report the original errno 2 error.
+- src/lib.rs: get_manga_update now calls helpers::fetch_detail().
+- res/source.json: version 7 -> 8.
+No other upstream file was changed. The template (templates/zaimanhua/) is
+included unmodified so the path dependency in Cargo.toml resolves unchanged.

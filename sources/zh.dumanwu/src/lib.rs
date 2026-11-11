@@ -66,7 +66,7 @@ fn select_index(filters: &[Filter], name: &str) -> usize {
     0
 }
 
-fn title_query(filters: &[Filter]) -> String {
+fn title_query(filters: Vec<Filter>) -> String {
     for f in filters {
         if let FilterType::Title = f.kind {
             if let Ok(v) = f.value.as_string() {
@@ -179,8 +179,10 @@ fn parse_search(html: aidoku::std::html::Node) -> Result<MangaPageResult> {
 }
 
 #[get_manga_list]
-fn get_manga_list(filters: Vec<Filter>, _page: i32) -> Result<MangaPageResult> {
-    let query = title_query(&filters);
+fn get_manga_list(filters: Vec<Filter>, _page: i32) -> Result<MangaPageResult
+    let rank = select_index(&filters, "排行榜");
+    let cate = select_index(&filters, "分类");
+    let query = title_query(filters);
     if !query.is_empty() {
         let q12: String = query.chars().take(12).collect();
         let body = format!("k={}", form_encode(&q12));
@@ -190,11 +192,9 @@ fn get_manga_list(filters: Vec<Filter>, _page: i32) -> Result<MangaPageResult> {
             .html()?;
         return parse_search(html);
     }
-    let rank = select_index(&filters, "排行榜");
     if rank > 0 && rank < RANK_IDS.len() {
         return fetch_ranking(RANK_IDS[rank]);
     }
-    let cate = select_index(&filters, "分类");
     if cate > 0 && cate < CATE_IDS.len() {
         let html = get_html(&format!("{DESKTOP_URL}/sort/{}", CATE_IDS[cate]))?;
         return parse_ranking(html);

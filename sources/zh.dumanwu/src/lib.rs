@@ -179,7 +179,7 @@ fn parse_search(html: aidoku::std::html::Node) -> Result<MangaPageResult> {
 }
 
 #[get_manga_list]
-fn get_manga_list(filters: Vec<Filter>, _page: i32) -> Result<MangaPageResult
+fn get_manga_list(filters: Vec<Filter>, _page: i32) -> Result<MangaPageResult> {
     let rank = select_index(&filters, "排行榜");
     let cate = select_index(&filters, "分类");
     let query = title_query(filters);

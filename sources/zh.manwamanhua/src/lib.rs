@@ -394,16 +394,16 @@ fn fetch_inline(url: &str, referer: &str) -> core::result::Result<String, String
         return Err("空地址".into());
     }
     let response = Request::get(url)
-        .map_err(|_| "创建请求失败".into())?
+        .map_err(|_| String::from("创建请求失败"))?
         .header("Referer", referer)
         .send()
-        .map_err(|_| "发送请求失败".into())?;
+        .map_err(|_| String::from("发送请求失败"))?;
     let code = response.status_code();
     if !(200..300).contains(&code) {
         return Err(format!("图床 HTTP {code}"));
     }
-    let bytes = response.get_data().map_err(|_| "读取图片数据失败".into())?;
-    crypto::data_url(&bytes).map_err(|_| "解密失败".into())
+    let bytes = response.get_data().map_err(|_| String::from("读取图片数据失败"))?;
+    crypto::data_url(&bytes).map_err(|_| String::from("解密失败"))
 }
 
 register_source!(ManwaManhua, ListingProvider, BaseUrlProvider);

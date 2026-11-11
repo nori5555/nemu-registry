@@ -2,22 +2,6 @@
   "name": "nori 自建移植源",
   "sources": [
     {
-      "id": "zh.manwamanhua",
-      "name": "漫蛙漫画",
-      "altNames": [
-        "Manwa Manhua"
-      ],
-      "version": 7,
-      "iconURL": "icons/zh.manwamanhua-v7.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v7.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 2,
-      "baseURL": "https://manwadz.cc",
-      "minAppVersion": "0.7.1"
-    },
-    {
       "id": "zh.zaimanhua",
       "name": "再漫画",
       "altNames": [],
@@ -75,6 +59,22 @@
       ],
       "contentRating": 0,
       "baseURL": "https://baozimh.org",
+      "minAppVersion": "0.7.1"
+    },
+    {
+      "id": "zh.manwamanhua",
+      "name": "漫蛙漫画",
+      "altNames": [
+        "Manwa Manhua"
+      ],
+      "version": 7,
+      "iconURL": "icons/zh.manwamanhua-v7.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v7.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manwadz.cc",
       "minAppVersion": "0.7.1"
     }
   ]

@@ -134,7 +134,7 @@ jobs:
       - name: Install nightly toolchain for zh.nnhanman
         run: rustup toolchain install nightly --target wasm32-unknown-unknown
 
-- name: Build zh.nnhanman
+      - name: Build zh.nnhanman
         env:
           RUSTFLAGS: "-C link-arg=--allow-undefined"
         run: |

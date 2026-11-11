@@ -284,7 +284,7 @@ impl Source for ManwaManhua {
             updated.title = detail.title;
             // Inline the cover: the host's image-processor path is unreliable on
             // mobile, and the bytes are AES-CBC encrypted at rest.
-            updated.cover = fetch_inline(&detail.cover, &referer).or(Some(detail.cover.clone()));
+            updated.cover = fetch_inline(&detail.cover, &referer).unwrap_or_else(|_| detail.cover.clone());
             updated.authors = (!detail.author.is_empty()).then(|| vec![detail.author]);
             updated.status = match detail.status {
                 1 => MangaStatus::Ongoing,
@@ -328,6 +328,8 @@ impl Source for ManwaManhua {
         let chapter_id = format!("{}", chapter.key.rsplit('/').next().unwrap_or(&chapter.key));
         let referer = format!("{base}/comic/{chapter_id}");
         let mut pages: Vec<Page> = Vec::new();
+        let mut inlined = 0;
+        let mut first_error: Option<String> = None;
         let mut page_no = 1;
         loop {
             let url = format!(
@@ -337,8 +339,16 @@ impl Source for ManwaManhua {
             let total_pages = data.data.pagination.as_ref().map(|p| p.total_pages).unwrap_or(1).max(1);
             for image in data.data.images.into_iter().filter(|i| i.width != -1) {
                 let url = match fetch_inline(&image.url, &referer) {
-                    Some(data_url) => data_url,
-                    None => image.url,
+                    Ok(data_url) => {
+                        inlined += 1;
+                        data_url
+                    }
+                    Err(reason) => {
+                        if first_error.is_none() {
+                            first_error = Some(reason);
+                        }
+                        image.url
+                    }
                 };
                 pages.push(Page { content: PageContent::url(url), ..Default::default() });
             }
@@ -349,6 +359,13 @@ impl Source for ManwaManhua {
         }
         if pages.is_empty() {
             bail!("漫蛙漫画本章节没有可读图片，可能需要登录或站点改版");
+        }
+        if inlined == 0 {
+            bail!(
+                "漫蛙漫画本章图片内联失败（0/{}）：{}",
+                pages.len(),
+                first_error.unwrap_or_default()
+            );
         }
         Ok(pages)
     }
@@ -369,16 +386,24 @@ impl BaseUrlProvider for ManwaManhua {
     fn get_base_url(&self) -> Result<String> { Ok(base_url()) }
 }
 
-fn fetch_inline(url: &str, referer: &str) -> Option<String> {
+/// Fetch an image, decrypt it and inline it as a data URL.
+/// Unlike the old silent Option, failures carry a short stage tag so the
+/// caller can report why inlining failed instead of falling back silently.
+fn fetch_inline(url: &str, referer: &str) -> core::result::Result<String, String> {
     if url.is_empty() {
-        return None;
+        return Err("空地址".into());
     }
-    let response = Request::get(url).ok()?.header("Referer", referer).send().ok()?;
-    if !(200..300).contains(&response.status_code()) {
-        return None;
+    let response = Request::get(url)
+        .map_err(|_| "创建请求失败".to_string())?
+        .header("Referer", referer)
+        .send()
+        .map_err(|_| "发送请求失败".to_string())?;
+    let code = response.status_code();
+    if !(200..300).contains(&code) {
+        return Err(format!("图床 HTTP {code}"));
     }
-    let bytes = response.get_data().ok()?;
-    crypto::data_url(&bytes).ok()
+    let bytes = response.get_data().map_err(|_| "读取图片数据失败".to_string())?;
+    crypto::data_url(&bytes).map_err(|_| "解密失败".to_string())
 }
 
 register_source!(ManwaManhua, ListingProvider, BaseUrlProvider);

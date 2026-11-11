@@ -1,4 +1,4 @@
-use aidoku::{error::Result, Manga, MangaPageResult};
+use aidoku::{error::Result, Manga, MangaPageResult, MangaViewer};
 use alloc::{string::ToString, vec::Vec};
 
 use crate::url::Url;
@@ -25,6 +25,7 @@ pub fn parser_mange_list(path: &str) -> Result<MangaPageResult> {
         cover: cover,
         title: title,
         url: url.to_string(),
+        viewer: MangaViewer::Vertical,
         ..Default::default()
       }
     })

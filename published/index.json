@@ -2,22 +2,6 @@
   "name": "nori 自建移植源",
   "sources": [
     {
-      "id": "zh.bilicomic",
-      "name": "哔哩漫画",
-      "altNames": [
-        "Bilicomic"
-      ],
-      "version": 5,
-      "iconURL": "icons/zh.bilicomic-v5.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bilicomic-v5.aix",
-      "languages": [
-        "zh"
-      ],
-      "contentRating": 0,
-      "baseURL": "https://www.bilimanga.net",
-      "minAppVersion": "0.7.1"
-    },
-    {
       "id": "zh.baozimh2",
       "name": "包子漫画2",
       "altNames": [],
@@ -90,6 +74,22 @@
       "baseURL": "https://nnhm7.com",
       "minAppVersion": null,
       "maxAppVersion": null
+    },
+    {
+      "id": "zh.bilicomic",
+      "name": "哔哩漫画",
+      "altNames": [
+        "Bilicomic"
+      ],
+      "version": 5,
+      "iconURL": "icons/zh.bilicomic-v5.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bilicomic-v5.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://www.bilimanga.net",
+      "minAppVersion": "0.7.1"
     }
   ]
 }

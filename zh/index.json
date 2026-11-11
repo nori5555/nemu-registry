@@ -382,15 +382,15 @@
       "id": "zh.bakamh",
       "name": "巴卡漫画",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.bakamh-v2.png",
-      "downloadURL": "sources/zh.bakamh-v2.aix",
+      "version": 3,
+      "iconURL": "icons/zh.bakamh-v3.png",
+      "downloadURL": "sources/zh.bakamh-v3.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 2,
-      "baseURL": null,
-      "minAppVersion": null,
+      "baseURL": "https://bakamh.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -476,9 +476,9 @@
       "altNames": [
         "Manwa Manhua"
       ],
-      "version": 7,
-      "iconURL": "icons/zh.manwamanhua-v7.png",
-      "downloadURL": "sources/zh.manwamanhua-v7.aix",
+      "version": 8,
+      "iconURL": "icons/zh.manwamanhua-v8.png",
+      "downloadURL": "sources/zh.manwamanhua-v8.aix",
       "languages": [
         "zh"
       ],
@@ -545,6 +545,21 @@
       "contentRating": 2,
       "baseURL": null,
       "minAppVersion": null,
+      "maxAppVersion": null
+    },
+    {
+      "id": "zh.dumanwu",
+      "name": "读漫屋",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/zh.dumanwu-v1.png",
+      "downloadURL": "sources/zh.dumanwu-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://m.dumanwu1.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {

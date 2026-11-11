@@ -62,6 +62,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.asmotoon",
+      "name": "Asmodeus Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.asmotoon-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.asmotoon-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://asmotoon.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.assortedscans",
       "name": "Assorted Scans",
       "altNames": [],
@@ -80,9 +95,9 @@
       "id": "en.asurascans",
       "name": "Asura Scans",
       "altNames": [],
-      "version": 19,
-      "iconURL": "icons/en.asurascans-v19.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.asurascans-v19.aix",
+      "version": 20,
+      "iconURL": "icons/en.asurascans-v20.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.asurascans-v20.aix",
       "languages": [
         "en"
       ],
@@ -227,6 +242,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.erisscans",
+      "name": "Eris Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.erisscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.erisscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://erisscans.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.evascans",
       "name": "Eva Scans",
       "altNames": [],
@@ -302,6 +332,36 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.genztoons",
+      "name": "Genz Toon",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.genztoons-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.genztoons-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://genztoons.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.grimscans",
+      "name": "Grim Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.grimscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.grimscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://grimscans.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.guya",
       "name": "Guya",
       "altNames": [],
@@ -347,6 +407,36 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.kaizenscan",
+      "name": "Kaizen Scan",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.kaizenscan-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.kaizenscan-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://kaizenscan.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.kewnscans",
+      "name": "Kewn Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.kewnscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.kewnscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://kewnscans.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.kingofshojo",
       "name": "KingOfShojo",
       "altNames": [],
@@ -389,6 +479,21 @@
       "contentRating": 1,
       "baseURL": null,
       "minAppVersion": null,
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.lunatoons",
+      "name": "Luna Toons",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.lunatoons-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.lunatoons-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://lunatoons.net",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -707,6 +812,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.mistscans",
+      "name": "Mist Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.mistscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mistscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://mistscans.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.nyxscans",
       "name": "Nyx Scans",
       "altNames": [],
@@ -829,6 +949,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.sirenscans",
+      "name": "Siren Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.sirenscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.sirenscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://sirenscans.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.stonescape",
       "name": "StoneScape",
       "altNames": [],
@@ -870,6 +1005,21 @@
       ],
       "contentRating": 0,
       "baseURL": "https://en-thunderscans.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.timelesstoons",
+      "name": "Timeless Toons",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.timelesstoons-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.timelesstoons-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://timelesstoons.org",
       "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
@@ -3030,15 +3180,15 @@
       "id": "zh.bakamh",
       "name": "巴卡漫画",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/zh.bakamh-v2.png",
-      "downloadURL": "https://raw.githubusercontent.com/suiyuran/aidoku-zh-sources/main/public/sources/zh.bakamh-v2.aix",
+      "version": 3,
+      "iconURL": "icons/zh.bakamh-v3.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bakamh-v3.aix",
       "languages": [
         "zh"
       ],
       "contentRating": 2,
-      "baseURL": null,
-      "minAppVersion": null,
+      "baseURL": "https://bakamh.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -3124,9 +3274,9 @@
       "altNames": [
         "Manwa Manhua"
       ],
-      "version": 7,
-      "iconURL": "icons/zh.manwamanhua-v7.png",
-      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v7.aix",
+      "version": 8,
+      "iconURL": "icons/zh.manwamanhua-v8.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.manwamanhua-v8.aix",
       "languages": [
         "zh"
       ],
@@ -3193,6 +3343,21 @@
       "contentRating": 2,
       "baseURL": null,
       "minAppVersion": null,
+      "maxAppVersion": null
+    },
+    {
+      "id": "zh.dumanwu",
+      "name": "读漫屋",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/zh.dumanwu-v1.png",
+      "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.dumanwu-v1.aix",
+      "languages": [
+        "zh"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://m.dumanwu1.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {

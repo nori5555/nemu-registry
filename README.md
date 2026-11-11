@@ -61,6 +61,7 @@
 
 本仓库由 GitHub Actions 每 2 天（UTC 03:17）重新拉取上游目录并转换，只有内容变化时才提交。
 可在 Actions 页面手动触发 `Sync source directory`。
+- 自维护源 zh.manwamanhua（漫蛙漫画）v2 起在源内解密图片并以 data: URL 内联，封面与内容图不再依赖图床直出。
 
 ## 重新生成
 

@@ -4,6 +4,11 @@ on:
   push:
     paths:
       - "sources/zh.manwamanhua/**"
+      - "sources/zh.zaimanhua/**"
+      - "templates/zaimanhua/**"
+      - "sources/zh.nnhanman/**"
+      - "sources/zh.bilicomic/**"
+      - "sources/zh.baozimh2/**"
   workflow_dispatch:
 
 permissions:
@@ -71,4 +76,213 @@ jobs:
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -m "Build zh.manwamanhua ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: Build zh.zaimanhua
+        run: |
+          cargo build --release \
+            --manifest-path sources/zh.zaimanhua/Cargo.toml \
+            --target wasm32-unknown-unknown
+          python3 sources/zh.zaimanhua/package.py \
+            --wasm sources/zh.zaimanhua/target/wasm32-unknown-unknown/release/zaimanhua.wasm \
+            --out sources/zh.zaimanhua-v8.aix
+
+      - name: Publish zh.zaimanhua package and registry entry
+        run: |
+          mkdir -p published/icons
+          cp sources/zh.zaimanhua-v8.aix published/
+          cp sources/zh.zaimanhua/res/icon.png published/icons/zh.zaimanhua-v8.png
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("published/index.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          entry = {
+              "id": "zh.zaimanhua",
+              "name": "再漫画",
+              "altNames": [],
+              "version": 8,
+              "iconURL": "icons/zh.zaimanhua-v8.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.zaimanhua-v8.aix",
+              "languages": ["zh"],
+              "contentRating": 1,
+              "baseURL": "https://www.zaimanhua.com",
+              "minAppVersion": "0.7.1",
+              "maxAppVersion": None,
+          }
+          sources = [s for s in data["sources"] if s["id"] != "zh.zaimanhua"] + [entry]
+          data["sources"] = sources
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          pathlib.Path("published/index.min.json").write_text(
+              json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+          PY
+
+      - name: Commit zh.zaimanhua artifacts
+        run: |
+          git add sources/zh.zaimanhua-v8.aix published/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Build zh.zaimanhua ($(date -u +%Y-%m-%d))"
+          git push
+
+      # zh.nnhanman is an aidoku 0.2.0 source; upstream builds it with
+      # cargo +nightly (AlanLang/aidoku-sources build.yaml), so install the
+      # nightly toolchain with the wasm target before building it.
+      - name: Install nightly toolchain for zh.nnhanman
+        run: rustup toolchain install nightly --target wasm32-unknown-unknown
+
+      - name: Build zh.nnhanman
+        run: |
+          cargo +nightly build --release \
+            --manifest-path sources/zh.nnhanman/Cargo.toml \
+            --target wasm32-unknown-unknown
+          python3 sources/zh.nnhanman/package.py \
+            --wasm sources/zh.nnhanman/target/wasm32-unknown-unknown/release/nnhanman.wasm \
+            --out sources/zh.nnhanman-v2.aix
+
+      - name: Publish zh.nnhanman package and registry entry
+        run: |
+          mkdir -p published/icons
+          cp sources/zh.nnhanman-v2.aix published/
+          cp sources/zh.nnhanman/res/Icon.png published/icons/zh.nnhanman-v2.png
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("published/index.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          entry = {
+              "id": "zh.nnhanman",
+              "name": "鸟鸟韩漫",
+              "altNames": [],
+              "version": 2,
+              "iconURL": "icons/zh.nnhanman-v2.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.nnhanman-v2.aix",
+              "languages": ["zh"],
+              "contentRating": 2,
+              "baseURL": "https://nnhm7.com",
+              "minAppVersion": None,
+              "maxAppVersion": None,
+          }
+          sources = [s for s in data["sources"] if s["id"] != "zh.nnhanman"] + [entry]
+          data["sources"] = sources
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          pathlib.Path("published/index.min.json").write_text(
+              json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+          PY
+
+      - name: Commit zh.nnhanman artifacts
+        run: |
+          git add sources/zh.nnhanman-v2.aix published/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Build zh.nnhanman ($(date -u +%Y-%m-%d))"
+          git push
+
+      # zh.bilicomic is an aidoku 0.2.0 source; upstream builds it with
+      # cargo +nightly (suiyuran/aidoku-zh-sources build.sh), and the
+      # nightly toolchain was already installed above for zh.nnhanman.
+      - name: Build zh.bilicomic
+        run: |
+          cargo +nightly build --release \
+            --manifest-path sources/zh.bilicomic/Cargo.toml \
+            --target wasm32-unknown-unknown
+          python3 sources/zh.bilicomic/package.py \
+            --wasm sources/zh.bilicomic/target/wasm32-unknown-unknown/release/bilicomic.wasm \
+            --out sources/zh.bilicomic-v5.aix
+
+      - name: Publish zh.bilicomic package and registry entry
+        run: |
+          mkdir -p published/icons
+          cp sources/zh.bilicomic-v5.aix published/
+          cp sources/zh.bilicomic/res/icon.png published/icons/zh.bilicomic-v5.png
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("published/index.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          entry = {
+              "id": "zh.bilicomic",
+              "name": "哔哩漫画",
+              "altNames": ["Bilicomic"],
+              "version": 5,
+              "iconURL": "icons/zh.bilicomic-v5.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.bilicomic-v5.aix",
+              "languages": ["zh"],
+              "contentRating": 0,
+              "baseURL": "https://www.bilimanga.net",
+              "minAppVersion": "0.7.1",
+          }
+          sources = [s for s in data["sources"] if s["id"] != "zh.bilicomic"] + [entry]
+          data["sources"] = sources
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          pathlib.Path("published/index.min.json").write_text(
+              json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+          PY
+
+      - name: Commit zh.bilicomic artifacts
+        run: |
+          git add sources/zh.bilicomic-v5.aix published/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Build zh.bilicomic ($(date -u +%Y-%m-%d))"
+          git push
+
+      # zh.baozimh2 is an aidoku 0.2.0 source; upstream builds it with
+      # cargo +nightly (suiyuran/aidoku-zh-sources build.sh).
+      - name: Build zh.baozimh2
+        run: |
+          cargo +nightly build --release \
+            --manifest-path sources/zh.baozimh2/Cargo.toml \
+            --target wasm32-unknown-unknown
+          python3 sources/zh.baozimh2/package.py \
+            --wasm sources/zh.baozimh2/target/wasm32-unknown-unknown/release/baozimh2.wasm \
+            --out sources/zh.baozimh2-v7.aix
+
+      - name: Publish zh.baozimh2 package and registry entry
+        run: |
+          mkdir -p published/icons
+          cp sources/zh.baozimh2-v7.aix published/
+          cp sources/zh.baozimh2/res/icon.png published/icons/zh.baozimh2-v7.png
+          python3 - <<'PY'
+          import json, pathlib
+          path = pathlib.Path("published/index.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          entry = {
+              "id": "zh.baozimh2",
+              "name": "包子漫画2",
+              "altNames": [],
+              "version": 7,
+              "iconURL": "icons/zh.baozimh2-v7.png",
+              "downloadURL": "https://nori5555.github.io/nemu-registry/published/zh.baozimh2-v7.aix",
+              "languages": ["zh"],
+              "contentRating": 0,
+              "baseURL": "https://baozimh.org",
+              "minAppVersion": "0.7.1",
+          }
+          sources = [s for s in data["sources"] if s["id"] != "zh.baozimh2"] + [entry]
+          data["sources"] = sources
+          path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+          pathlib.Path("published/index.min.json").write_text(
+              json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+          PY
+
+      - name: Commit zh.baozimh2 artifacts
+        run: |
+          git add sources/zh.baozimh2-v7.aix published/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "Build zh.baozimh2 ($(date -u +%Y-%m-%d))"
           git push

@@ -11,7 +11,7 @@ use aidoku::{
     prelude::*,
 };
 
-const KEY: &[u8; 32] = b"0B6666A0-BB59-1381-B746-a0E4C9AC";
+pub const KEY: &[u8; 32] = b"0B6666A0-BB59-1381-B746-a0E4C9AC";
 
 pub fn is_image(data: &[u8]) -> bool {
     data.starts_with(b"\xff\xd8\xff")

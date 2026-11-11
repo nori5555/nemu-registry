@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // Port of the Keiyoushi `ManwaManhua` (漫蛙漫画) extension. See NOTICE.
-// The site's JSON API is used directly; no website JavaScript runs.
+// The site's JSON API is used directly. The frontend JS file is fetched
+// only to read the current AES key string (never executed), mirroring the
+// Mihon manwayuplus extension's getAesKey.
 #![no_std]
 
 mod crypto;
@@ -22,6 +24,17 @@ const DEFAULT_BASE_URL: &str = "https://manwadz.cc";
 const SEARCH_PAGE_SIZE: i32 = 20;
 const CATE_PAGE_SIZE: i32 = 36;
 const IMAGE_PAGE_SIZE: i32 = 100;
+
+// Image CDN lines, mirroring the Mihon manwayuplus extension's LINE1-6.
+// Every line serves the same AES-encrypted bytes for the same path, so a
+// line is only an availability fallback, never a plaintext shortcut.
+const IMAGE_HOSTS: [&str; 5] = [
+    "tu.mhttu.cc",
+    "tu.mwzu.cc",
+    "fm.mwtt.cc",
+    "ce.mwzu.cc",
+    "ce.mhttu.cc",
+];
 
 // ---------------------------------------------------------------- json models
 #[derive(Deserialize)]
@@ -284,7 +297,8 @@ impl Source for ManwaManhua {
             updated.title = detail.title;
             // Inline the cover: the host's image-processor path is unreliable on
             // mobile, and the bytes are AES-CBC encrypted at rest.
-            updated.cover = Some(fetch_inline(&detail.cover, &referer).unwrap_or_else(|_| detail.cover.clone()));
+            let key = fetch_aes_key(&base);
+            updated.cover = Some(fetch_inline(&detail.cover, &referer, &key).unwrap_or_else(|_| detail.cover.clone()));
             updated.authors = (!detail.author.is_empty()).then(|| vec![detail.author]);
             updated.status = match detail.status {
                 1 => MangaStatus::Ongoing,
@@ -327,6 +341,7 @@ impl Source for ManwaManhua {
         let base = base_url();
         let chapter_id = format!("{}", chapter.key.rsplit('/').next().unwrap_or(&chapter.key));
         let referer = format!("{base}/comic/{chapter_id}");
+        let key = fetch_aes_key(&base);
         let mut pages: Vec<Page> = Vec::new();
         let mut inlined = 0;
         let mut first_error: Option<String> = None;
@@ -338,7 +353,7 @@ impl Source for ManwaManhua {
             let data: Response<ImagePage> = get_json(&url, &referer)?;
             let total_pages = data.data.pagination.as_ref().map(|p| p.total_pages).unwrap_or(1).max(1);
             for image in data.data.images.into_iter().filter(|i| i.width != -1) {
-                let url = match fetch_inline(&image.url, &referer) {
+                let url = match fetch_inline(&image.url, &referer, &key) {
                     Ok(data_url) => {
                         inlined += 1;
                         data_url
@@ -386,13 +401,122 @@ impl BaseUrlProvider for ManwaManhua {
     fn get_base_url(&self) -> Result<String> { Ok(base_url()) }
 }
 
+/// Fetch the live AES key from the site's own frontend JS
+/// (`{base}/static/assets/js/base.js` contains `AES_KEY: '...'`), mirroring
+/// the Mihon manwayuplus extension's getAesKey (regex `AES_KEY\s*:\s*['"]([^'"]+)['"]`,
+/// cached value, compiled-in default). Any failure falls back to the
+/// compiled-in key, so a missing or changed JS file can never break images
+/// that the old key still decrypts.
+fn fetch_aes_key(base: &str) -> [u8; 32] {
+    let key = (|| -> Option<[u8; 32]> {
+        let url = format!("{base}/static/assets/js/base.js");
+        let referer = format!("{base}/");
+        let response = Request::get(&url).ok()?
+            .header("Referer", &referer)
+            .send().ok()?;
+        if !(200..300).contains(&response.status_code()) {
+            return None;
+        }
+        let bytes = response.get_data().ok()?;
+        let text = core::str::from_utf8(&bytes).ok()?;
+        let key_str = extract_aes_key(text)?;
+        if key_str.len() != 32 {
+            return None;
+        }
+        let mut key = [0u8; 32];
+        key.copy_from_slice(key_str.as_bytes());
+        Some(key)
+    })();
+    key.unwrap_or(*crypto::KEY)
+}
+
+/// Find the `AES_KEY: '...'` definition in the frontend JS and return the
+/// quoted value (exactly 32 chars). Occurrences that are not a definition
+/// (e.g. `this.AES_KEY`) are skipped.
+fn extract_aes_key(js: &str) -> Option<&str> {
+    let marker = "AES_KEY";
+    let mut rest = js;
+    loop {
+        let idx = rest.find(marker)?;
+        let after = rest[idx + marker.len()..].trim_start();
+        if after.starts_with(':') {
+            let after_colon = after[1..].trim_start();
+            let quote = after_colon.chars().next()?;
+            if quote == '\'' || quote == '"' {
+                let inner = &after_colon[quote.len_utf8()..];
+                if let Some(end) = inner.find(quote) {
+                    let value = &inner[..end];
+                    if value.len() == 32 {
+                        return Some(value);
+                    }
+                }
+            }
+        }
+        rest = after;
+    }
+}
+
+fn url_host(url: &str) -> &str {
+    match url.find("://") {
+        Some(i) => {
+            let rest = &url[i + 3..];
+            match rest.find('/') {
+                Some(j) => &rest[..j],
+                None => rest,
+            }
+        }
+        None => "",
+    }
+}
+
+fn with_host(url: &str, host: &str) -> String {
+    match url.find("://") {
+        Some(i) => {
+            let rest = &url[i + 3..];
+            match rest.find('/') {
+                Some(j) => format!("{}://{}{}", &url[..i], host, &rest[j..]),
+                None => format!("{}://{}", &url[..i], host),
+            }
+        }
+        None => url.into(),
+    }
+}
+
 /// Fetch an image, decrypt it and inline it as a data URL.
-/// Unlike the old silent Option, failures carry a short stage tag so the
-/// caller can report why inlining failed instead of falling back silently.
-fn fetch_inline(url: &str, referer: &str) -> core::result::Result<String, String> {
+/// Tries the URL's own host first, then every other known image CDN line
+/// with the same path (all lines serve identical bytes), so one dead or
+/// blocked CDN no longer fails the image. Unlike the old silent Option,
+/// failures carry a short stage tag so the caller can report why inlining
+/// failed instead of falling back silently.
+fn fetch_inline(url: &str, referer: &str, key: &[u8; 32]) -> core::result::Result<String, String> {
     if url.is_empty() {
         return Err("空地址".into());
     }
+    let mut hosts: Vec<&str> = Vec::new();
+    let original = url_host(url);
+    if !original.is_empty() {
+        hosts.push(original);
+    }
+    for host in IMAGE_HOSTS {
+        if host != original {
+            hosts.push(host);
+        }
+    }
+    let mut first_error: Option<String> = None;
+    for host in hosts {
+        match fetch_inline_once(&with_host(url, host), referer, key) {
+            Ok(data_url) => return Ok(data_url),
+            Err(reason) => {
+                if first_error.is_none() {
+                    first_error = Some(reason);
+                }
+            }
+        }
+    }
+    Err(first_error.unwrap_or_else(|| String::from("图床全部线路失败")))
+}
+
+fn fetch_inline_once(url: &str, referer: &str, key: &[u8; 32]) -> core::result::Result<String, String> {
     let response = Request::get(url)
         .map_err(|_| String::from("创建请求失败"))?
         .header("Referer", referer)
@@ -403,7 +527,7 @@ fn fetch_inline(url: &str, referer: &str) -> core::result::Result<String, String
         return Err(format!("图床 HTTP {code}"));
     }
     let bytes = response.get_data().map_err(|_| String::from("读取图片数据失败"))?;
-    crypto::data_url(&bytes).map_err(|_| String::from("解密失败"))
+    crypto::data_url_with_key(&bytes, key).map_err(|_| String::from("解密失败"))
 }
 
 register_source!(ManwaManhua, ListingProvider, BaseUrlProvider);

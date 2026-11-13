@@ -1417,11 +1417,11 @@
       "id": "fr.sushiscan",
       "name": "Sushiscan",
       "altNames": [],
-      "version": 9,
-      "iconURL": "icons/fr.sushiscan-v9.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/fr.sushiscan-v9.aix",
+      "version": 10,
+      "iconURL": "icons/fr.sushiscan-v10.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/fr.sushiscan-v10.aix",
       "languages": [
-        "en"
+        "fr"
       ],
       "contentRating": 1,
       "baseURL": "https://sushiscan.net",
@@ -2040,9 +2040,9 @@
       "id": "multi.mangadex",
       "name": "MangaDex",
       "altNames": [],
-      "version": 14,
-      "iconURL": "icons/multi.mangadex-v14.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.mangadex-v14.aix",
+      "version": 15,
+      "iconURL": "icons/multi.mangadex-v15.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.mangadex-v15.aix",
       "languages": [
         "en",
         "sq",

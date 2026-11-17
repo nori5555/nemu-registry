@@ -197,18 +197,33 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.divascans",
+      "name": "DivaScans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.divascans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.divascans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://divascans.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.drakescans",
       "name": "Drake Scans",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/en.drakescans-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.drakescans-v2.aix",
+      "version": 3,
+      "iconURL": "icons/en.drakescans-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.drakescans-v3.aix",
       "languages": [
         "en"
       ],
       "contentRating": 1,
       "baseURL": "https://drakecomic.net",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -230,15 +245,15 @@
       "id": "en.elftoon",
       "name": "Elf Toon",
       "altNames": [],
-      "version": 3,
-      "iconURL": "icons/en.elftoon-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.elftoon-v3.aix",
+      "version": 4,
+      "iconURL": "icons/en.elftoon-v4.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.elftoon-v4.aix",
       "languages": [
         "en"
       ],
       "contentRating": 1,
       "baseURL": "https://elftoon.net",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -392,18 +407,33 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.hijalascans",
+      "name": "Hijala Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.hijalascans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.hijalascans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://en-hijala.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.hivescans",
       "name": "Hive Scans",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/en.hivescans-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.hivescans-v2.aix",
+      "version": 3,
+      "iconURL": "icons/en.hivescans-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.hivescans-v3.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://hivetoons.org",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -418,6 +448,21 @@
       ],
       "contentRating": 2,
       "baseURL": "https://kaizenscan.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.kaynscans",
+      "name": "Kayn Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.kaynscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.kaynscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://kaynscans.com",
       "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
@@ -530,15 +575,15 @@
       "id": "en.magusmanga",
       "name": "Magus Manga",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/en.magusmanga-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.magusmanga-v2.aix",
+      "version": 3,
+      "iconURL": "icons/en.magusmanga-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.magusmanga-v3.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://magustoon.org",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -830,15 +875,15 @@
       "id": "en.nyxscans",
       "name": "Nyx Scans",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.nyxscans-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.nyxscans-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.nyxscans-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.nyxscans-v2.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://nyxscans.com",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -945,6 +990,21 @@
       ],
       "contentRating": 1,
       "baseURL": "https://rokaricomics.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.sanascans",
+      "name": "Sana Scans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.sanascans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.sanascans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 0,
+      "baseURL": "https://sanascans.com",
       "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
@@ -1084,6 +1144,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.valirscans",
+      "name": "ValirScans",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.valirscans-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.valirscans-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://valirscans.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.violetscans",
       "name": "Violet Scans",
       "altNames": [],
@@ -1102,15 +1177,15 @@
       "id": "en.vortexscans",
       "name": "Vortex Scans",
       "altNames": [],
-      "version": 3,
-      "iconURL": "icons/en.vortexscans-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.vortexscans-v3.aix",
+      "version": 4,
+      "iconURL": "icons/en.vortexscans-v4.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.vortexscans-v4.aix",
       "languages": [
         "en"
       ],
       "contentRating": 0,
       "baseURL": "https://vortexscans.org",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {
@@ -1162,15 +1237,15 @@
       "id": "es.eternalmangas",
       "name": "EternalMangas",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/es.eternalmangas-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/es.eternalmangas-v2.aix",
+      "version": 3,
+      "iconURL": "icons/es.eternalmangas-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/es.eternalmangas-v3.aix",
       "languages": [
         "es"
       ],
-      "contentRating": 1,
+      "contentRating": 2,
       "baseURL": "https://eternalmangas.org",
-      "minAppVersion": "0.7.1",
+      "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
     {

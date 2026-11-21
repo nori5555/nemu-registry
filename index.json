@@ -782,6 +782,21 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.mangataro",
+      "name": "MangaTaro",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.mangataro-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mangataro-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://mangataro.org",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.mangatx",
       "name": "MangaTx",
       "altNames": [],
@@ -823,6 +838,21 @@
       ],
       "contentRating": 1,
       "baseURL": "https://manhuaplus.org",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.manhwa18net",
+      "name": "Manhwa18.net",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.manhwa18net-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.manhwa18net-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://manhwa18.net",
       "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
@@ -869,6 +899,21 @@
       "contentRating": 0,
       "baseURL": "https://mistscans.org",
       "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.mkissa",
+      "name": "MKissa",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.mkissa-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mkissa-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://mkissa.to",
+      "minAppVersion": "0.8.4",
       "maxAppVersion": null
     },
     {
@@ -990,6 +1035,21 @@
       ],
       "contentRating": 1,
       "baseURL": "https://rokaricomics.com",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.roliascan",
+      "name": "Rolia Scan",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.roliascan-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.roliascan-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://roliascan.com",
       "minAppVersion": "0.8.3",
       "maxAppVersion": null
     },
@@ -1852,9 +1912,9 @@
       "id": "ja.spoilerplus",
       "name": "SpoilerPlus",
       "altNames": [],
-      "version": 2,
-      "iconURL": "icons/ja.spoilerplus-v2.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.spoilerplus-v2.aix",
+      "version": 3,
+      "iconURL": "icons/ja.spoilerplus-v3.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.spoilerplus-v3.aix",
       "languages": [
         "ja"
       ],

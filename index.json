@@ -785,9 +785,9 @@
       "id": "en.mangataro",
       "name": "MangaTaro",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.mangataro-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mangataro-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.mangataro-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mangataro-v2.aix",
       "languages": [
         "en"
       ],
@@ -905,9 +905,9 @@
       "id": "en.mkissa",
       "name": "MKissa",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.mkissa-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mkissa-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.mkissa-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.mkissa-v2.aix",
       "languages": [
         "en"
       ],
@@ -1042,9 +1042,9 @@
       "id": "en.roliascan",
       "name": "Rolia Scan",
       "altNames": [],
-      "version": 1,
-      "iconURL": "icons/en.roliascan-v1.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.roliascan-v1.aix",
+      "version": 2,
+      "iconURL": "icons/en.roliascan-v2.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.roliascan-v2.aix",
       "languages": [
         "en"
       ],
@@ -1246,6 +1246,21 @@
       "contentRating": 0,
       "baseURL": "https://vortexscans.org",
       "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.vymanga",
+      "name": "VyManga",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.vymanga-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.vymanga-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://mangavyvy.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -1762,9 +1777,9 @@
       "id": "ja.mangarawbest",
       "name": "Manga Raw Best",
       "altNames": [],
-      "version": 3,
-      "iconURL": "icons/ja.mangarawbest-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.mangarawbest-v3.aix",
+      "version": 4,
+      "iconURL": "icons/ja.mangarawbest-v4.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.mangarawbest-v4.aix",
       "languages": [
         "ja"
       ],
@@ -1837,9 +1852,9 @@
       "id": "ja.rawdevart",
       "name": "Rawdevart",
       "altNames": [],
-      "version": 3,
-      "iconURL": "icons/ja.rawdevart-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.rawdevart-v3.aix",
+      "version": 4,
+      "iconURL": "icons/ja.rawdevart-v4.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.rawdevart-v4.aix",
       "languages": [
         "ja"
       ],
@@ -1897,9 +1912,9 @@
       "id": "ja.soraraw",
       "name": "Soraraw",
       "altNames": [],
-      "version": 9,
-      "iconURL": "icons/ja.soraraw-v9.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.soraraw-v9.aix",
+      "version": 10,
+      "iconURL": "icons/ja.soraraw-v10.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/ja.soraraw-v10.aix",
       "languages": [
         "ja"
       ],
@@ -2623,6 +2638,61 @@
       "maxAppVersion": null
     },
     {
+      "id": "multi.yaoime",
+      "name": "yaoi.me",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/multi.yaoime-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.yaoime-v1.aix",
+      "languages": [
+        "en",
+        "ja",
+        "zh",
+        "vi",
+        "id",
+        "es",
+        "ko",
+        "pl",
+        "tr",
+        "fr",
+        "it",
+        "ru",
+        "pt",
+        "hu",
+        "uk",
+        "cs",
+        "th",
+        "ar",
+        "es-419",
+        "mn",
+        "de",
+        "fa",
+        "pt-BR",
+        "ca",
+        "sk",
+        "bg",
+        "ro",
+        "bn",
+        "he",
+        "km",
+        "my",
+        "ms",
+        "nl",
+        "hi",
+        "kk",
+        "hr",
+        "fi",
+        "sr",
+        "el",
+        "sv",
+        "no"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://yaoi.me",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "pt.flowermanga",
       "name": "Flower Manga",
       "altNames": [],
@@ -2986,14 +3056,14 @@
       "id": "vi.zettruyen",
       "name": "ZetTruyen",
       "altNames": [],
-      "version": 9,
-      "iconURL": "icons/vi.zettruyen-v9.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/vi.zettruyen-v9.aix",
+      "version": 10,
+      "iconURL": "icons/vi.zettruyen-v10.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/vi.zettruyen-v10.aix",
       "languages": [
         "vi"
       ],
       "contentRating": 1,
-      "baseURL": "https://www.zettruyen5.com",
+      "baseURL": "https://www.zettruyen6.com",
       "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },

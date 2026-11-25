@@ -155,9 +155,9 @@
       "id": "en.chikari",
       "name": "Chikari",
       "altNames": [],
-      "version": 3,
-      "iconURL": "icons/en.chikari-v3.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.chikari-v3.aix",
+      "version": 4,
+      "iconURL": "icons/en.chikari-v4.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.chikari-v4.aix",
       "languages": [
         "en"
       ],
@@ -509,6 +509,21 @@
       "contentRating": 0,
       "baseURL": "https://lagoonscans.com",
       "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.lewdmanhwa",
+      "name": "LewdManhwa",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.lewdmanhwa-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.lewdmanhwa-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://lewdmanhwa.com",
+      "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },
     {
@@ -1204,6 +1219,36 @@
       "maxAppVersion": null
     },
     {
+      "id": "en.toonx",
+      "name": "Toonx",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.toonx-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.toonx-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 2,
+      "baseURL": "https://toonx.to",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.toonz",
+      "name": "Toonz",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.toonz-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.toonz-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://toonz.to",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
       "id": "en.valirscans",
       "name": "ValirScans",
       "altNames": [],
@@ -1260,6 +1305,36 @@
       ],
       "contentRating": 2,
       "baseURL": "https://mangavyvy.com",
+      "minAppVersion": "0.7.1",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.webnex",
+      "name": "Webnex",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.webnex-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.webnex-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://webnex.cc",
+      "minAppVersion": "0.8.3",
+      "maxAppVersion": null
+    },
+    {
+      "id": "en.webtoonclub",
+      "name": "WebtoonClub",
+      "altNames": [],
+      "version": 1,
+      "iconURL": "icons/en.webtoonclub-v1.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/en.webtoonclub-v1.aix",
+      "languages": [
+        "en"
+      ],
+      "contentRating": 1,
+      "baseURL": "https://webtoonclub.com",
       "minAppVersion": "0.7.1",
       "maxAppVersion": null
     },

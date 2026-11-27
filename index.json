@@ -2581,9 +2581,9 @@
       "id": "multi.xcomic",
       "name": "XCOMIC",
       "altNames": [],
-      "version": 5,
-      "iconURL": "icons/multi.xcomic-v5.png",
-      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.xcomic-v5.aix",
+      "version": 6,
+      "iconURL": "icons/multi.xcomic-v6.png",
+      "downloadURL": "https://aidoku-community.github.io/sources/sources/multi.xcomic-v6.aix",
       "languages": [
         "en",
         "fr",
